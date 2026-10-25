@@ -13,9 +13,44 @@ let package = Package(
             name: "NeNeReversiCore",
             swiftSettings: [.treatAllWarnings(as: .error), .enableUpcomingFeature("ExistentialAny")]
         ),
+        .target(
+            name: "NeNeReversiEngine",
+            dependencies: ["NeNeReversiCore"],
+            swiftSettings: [.treatAllWarnings(as: .error), .enableUpcomingFeature("ExistentialAny")]
+        ),
+        .target(
+            name: "NeNeReversiRender",
+            dependencies: ["NeNeReversiCore", "NeNeReversiEngine"],
+            swiftSettings: [.treatAllWarnings(as: .error), .enableUpcomingFeature("ExistentialAny")]
+        ),
+        .target(
+            name: "NeNeReversiTerminal",
+            dependencies: ["NeNeReversiRender"],
+            swiftSettings: [.treatAllWarnings(as: .error), .enableUpcomingFeature("ExistentialAny")]
+        ),
+        .executableTarget(
+            name: "nene-reversi",
+            dependencies: ["NeNeReversiCore", "NeNeReversiEngine", "NeNeReversiRender", "NeNeReversiTerminal"],
+            swiftSettings: [.treatAllWarnings(as: .error), .enableUpcomingFeature("ExistentialAny")]
+        ),
         .testTarget(
             name: "NeNeReversiCoreTests",
             dependencies: ["NeNeReversiCore"],
+            swiftSettings: [.treatAllWarnings(as: .error), .enableUpcomingFeature("ExistentialAny")]
+        ),
+        .testTarget(
+            name: "NeNeReversiEngineTests",
+            dependencies: ["NeNeReversiCore", "NeNeReversiEngine"],
+            swiftSettings: [.treatAllWarnings(as: .error), .enableUpcomingFeature("ExistentialAny")]
+        ),
+        .testTarget(
+            name: "NeNeReversiRenderTests",
+            dependencies: ["NeNeReversiCore", "NeNeReversiEngine", "NeNeReversiRender"],
+            swiftSettings: [.treatAllWarnings(as: .error), .enableUpcomingFeature("ExistentialAny")]
+        ),
+        .testTarget(
+            name: "NeNeReversiTerminalTests",
+            dependencies: ["NeNeReversiRender", "NeNeReversiTerminal"],
             swiftSettings: [.treatAllWarnings(as: .error), .enableUpcomingFeature("ExistentialAny")]
         ),
     ],

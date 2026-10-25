@@ -4,9 +4,9 @@
 BASE ?= origin/main
 SWIFTLINT := .tools/swiftlint
 
-.PHONY: check bootstrap tools build test format lint conformance conformance-test commits
+.PHONY: check bootstrap tools build test smoke format lint conformance conformance-test commits
 
-check: tools build format lint conformance conformance-test test commits
+check: tools build format lint conformance conformance-test test smoke commits
 	@echo "make check: 緑"
 
 bootstrap: tools
@@ -21,6 +21,11 @@ build:
 # perft の深いところはデバッグ構成では遅いので、テストは release 構成で回す（ADR 0006）。
 test:
 	eng/swift-strict.sh swift test -c release
+
+# 実行ファイルを疑似端末で動かし、キーと終わり方ごとの端末の復元を見る（FR-08・ADR 0008）。release 構成の実行ファイルを使う
+smoke:
+	eng/swift-strict.sh swift build -c release --product nene-reversi
+	python3 eng/smoke-terminal.py .build/release/nene-reversi
 
 format:
 	eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format

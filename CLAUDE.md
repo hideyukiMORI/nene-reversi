@@ -135,6 +135,6 @@ Waivers: none | WVR-NNNN
 
 現在のタスクは [docs/todo/current.md](docs/todo/current.md)。GitHub Issue が正で、そこは要約。
 
-- 動くもの: `make check`。Core の合法手生成・反転・パス・終局・局面の文字列表現（画面なし）。perft は初期局面の深さ 1〜11 で公表値と一致（ADR 0006）
-- 動かないもの: 画面・端末・探索・合成ルート。Phase 3 の次は「ランダムに打つ 2 者の自動対局を画面に出す」
+- 動くもの: `make check`。`nene-reversi` がランダムに打つ 2 者の対局を端末に描き続け、`q`・Ctrl+C・異常終了のどれでも端末を戻す（ADR 0007・0008）。perft は初期局面の深さ 1〜11 で公表値と一致（ADR 0006）
+- 動かないもの: 評価と探索・12 テーマ・キャストのセリフ・罫線の枠・配布。Phase 3 の次は「実機（Windows Terminal）の画面写真で確かめる」
 - 施主の決定は [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md) にそろっている。決定を覆したくなった点や、要件に無い機能を足したくなった点は、自分で決めずに施主に聞く

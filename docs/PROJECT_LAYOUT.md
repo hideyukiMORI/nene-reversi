@@ -11,7 +11,7 @@
 ## 1. 承認されたモジュール
 
 空の「将来用 target」を作らない。下の一覧は「承認された形」で（ADR 0004）、各 target は最初の具体的な責務が生じた PR で足す。
-**いま `Package.swift` にあるのは `NeNeReversiCore` と `NeNeReversiCoreTests` の 2 本**（Issue #3）。
+**いま `Package.swift` には承認された 5 target と 4 つのテスト target がすべてある**（Core は Issue #3、残りは Issue #5）。
 
 ```text
 nene-reversi (executable)
@@ -42,7 +42,7 @@ NeNeReversiCore
 NeNeReversiCore      -> （無し）
 NeNeReversiEngine    -> NeNeReversiCore
 NeNeReversiRender    -> NeNeReversiCore, NeNeReversiEngine
-NeNeReversiTerminal  -> NeNeReversiRender                         ＋ 標準モジュール Glibc
+NeNeReversiTerminal  -> NeNeReversiRender                         ＋ 標準モジュール Glibc・Synchronization（シグナルの旗・ADR 0008）
 nene-reversi         -> 上の 4 つすべて（明示的な合成のためだけに） ＋ 標準モジュール Glibc
 ```
 

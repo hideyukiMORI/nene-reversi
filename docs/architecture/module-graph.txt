@@ -7,7 +7,7 @@
 NeNeReversiCore          kind=library     deps=
 NeNeReversiEngine        kind=library     deps=NeNeReversiCore
 NeNeReversiRender        kind=library     deps=NeNeReversiCore,NeNeReversiEngine
-NeNeReversiTerminal      kind=library     deps=NeNeReversiRender                                                     std=Glibc unsafe=allowed
+NeNeReversiTerminal      kind=library     deps=NeNeReversiRender                                                     std=Glibc,Synchronization unsafe=allowed
 nene-reversi             kind=executable  deps=NeNeReversiCore,NeNeReversiEngine,NeNeReversiRender,NeNeReversiTerminal std=Glibc role=composition-root
 
 NeNeReversiCoreTests     kind=test        deps=NeNeReversiCore                                                       std=Testing

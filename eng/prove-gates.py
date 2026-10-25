@@ -5,11 +5,9 @@
 「意図した規則 ID（または道具の規則名）で落ちること」を出力から確かめる。仕込まない複製（対照）では `make check` が
 exit 0 になることも確かめる。作業木そのものには触れない。
 
-違反を仕込むには Swift のソースが要るので、どの証明も同じ「足場」（依存グラフの正本どおりの target と、
-まだ作業木に無い target の最小のソース）を置いてから 1 か所だけ壊す。作業木にある target（Core とそのテスト・Issue #3）は
-本物をそのまま使う。足場は証明のための一時物で、作業木には入れない。
+すべての target が作業木にある（Issue #5）ので、証明は本物のソースや設定に違反を 1 か所だけ仕込む。
 
-移植元: NeNe Gambit eng/prove-gates.py（コミット 8c5b8f6 の足場の方式）。複製は git の一覧で作り、
+移植元: NeNe Gambit eng/prove-gates.py（コミット 8c5b8f6・足場をやめた形は f850722）。複製は git の一覧で作り、
 このリポジトリで足した検査の証明（P55 以降）を足した（ADR 0003）。
 
     python3 eng/prove-gates.py [--only P01 P02 ...]
@@ -33,82 +31,6 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "docs" / "quality" / "gate-proofs.json"
 SETTINGS = 'swiftSettings: [.treatAllWarnings(as: .error), .enableUpcomingFeature("ExistentialAny")]'
 
-TARGETS = {
-    "NeNeReversiCore": ("target", ""),
-    "NeNeReversiEngine": ("target", '"NeNeReversiCore"'),
-    "NeNeReversiRender": ("target", '"NeNeReversiCore", "NeNeReversiEngine"'),
-    "NeNeReversiTerminal": ("target", '"NeNeReversiRender"'),
-    "nene-reversi": ("executableTarget",
-                    '"NeNeReversiCore", "NeNeReversiEngine", "NeNeReversiRender", "NeNeReversiTerminal"'),
-    "NeNeReversiCoreTests": ("testTarget", '"NeNeReversiCore"'),
-}
-
-SOURCES = {
-    "Sources/NeNeReversiEngine/Pick.swift": """\
-import NeNeReversiCore
-
-/// 注入された乱数源から升を選ぶ。証明用の最小の型。
-public enum Pick {
-    /// 0..<count の升から 1 つ選ぶ。
-    public static func square(count: Int, using generator: inout some RandomNumberGenerator) -> Square? {
-        Square.all[Int.random(in: 0..<count, using: &generator)]
-    }
-}
-""",
-    "Sources/NeNeReversiRender/Cell.swift": """\
-/// 文字セル 1 つ。証明用の最小の型。
-public struct Cell: Sendable {
-    public let glyph: Character
-
-    /// セルを作る。
-    public init(glyph: Character) {
-        self.glyph = glyph
-    }
-}
-""",
-    "Sources/NeNeReversiTerminal/Screen.swift": """\
-import Glibc
-
-/// 端末の大きさを読む。unsafe 系 API を許す区画の証明用。
-public enum Screen {
-    /// 端末の桁数。読めなければ 0。
-    public static func columns() -> Int {
-        var size = winsize()
-        let status = withUnsafeMutablePointer(to: &size) { pointer in
-            ioctl(STDOUT_FILENO, UInt(TIOCGWINSZ), pointer)
-        }
-        return status == 0 ? Int(size.ws_col) : 0
-    }
-}
-""",
-    "Sources/nene-reversi/main.swift": """\
-import NeNeReversiCore
-import NeNeReversiEngine
-import NeNeReversiTerminal
-
-let start = ContinuousClock.now
-var generator = SystemRandomNumberGenerator()
-let square = Pick.square(count: 64, using: &generator)
-let arguments = CommandLine.arguments.count
-print(square?.index ?? -1, Screen.columns(), arguments, ContinuousClock.now - start >= .zero)
-""",
-}
-
-
-def package_swift(extra: dict[str, str] | None = None) -> str:
-    """足場の Package.swift。extra は target 名 → 置き換える `.target(...)` の本文。"""
-    lines = []
-    for name, (kind, deps) in TARGETS.items():
-        default = f'.{kind}(name: "{name}", dependencies: [{deps}], {SETTINGS})'
-        lines.append((extra or {}).get(name, default))
-    body = ",\n        ".join(lines)
-    return (
-        "// swift-tools-version: 6.2\n\nimport PackageDescription\n\nlet package = Package(\n"
-        '    name: "NeNeReversi",\n    targets: [\n        ' + body + "\n    ],\n"
-        "    swiftLanguageModes: [.v6]\n)\n"
-    )
-
-
 @dataclass
 class Proof:
     id: str
@@ -117,7 +39,6 @@ class Proof:
     mutate: Callable[[Path], None]
     expect: str  # 出力に現れるべき正規表現（意図した規則 ID か道具の規則名）
     command: list[str] = field(default_factory=lambda: ["make", "check"])
-    scaffold: bool = True
     expect_exit_zero: bool = False
     expect_all: list[str] = field(default_factory=list)  # 追加で、出力にすべて現れるべき正規表現
 
@@ -213,21 +134,19 @@ def every_lint_rule() -> str:
 
 
 PROOFS: list[Proof] = [
-    Proof("P00", [], "対照: 足場だけ（違反なし）。合成ルートが時計・乱数・CommandLine・print を使い、Terminal が withUnsafe を使う",
+    Proof("P00", [], "対照: 作業木そのまま（違反なし）。合成ルートが時計・乱数・CommandLine・getenv を使い、Terminal が withUnsafe と ioctl を使う",
           nothing, r"make check: 緑", expect_exit_zero=True),
-    Proof("P00b", [], "対照: 足場を置かない作業木そのまま", nothing, r"make check: 緑", scaffold=False, expect_exit_zero=True),
     Proof("P01", ["ARC-002"], "Core が宣言していない Engine を import する",
           core_file("Probe.swift", "import NeNeReversiEngine\n\n/// 証明用。\nenum Probe {}\n"), r"no such module 'NeNeReversiEngine'"),
     Proof("P02", ["ARC-002", "CNF-010", "QLT-006"], "Terminal が正本に無い Core への依存を宣言する（循環は作らない）",
-          lambda r: write(r, "Package.swift", package_swift({"NeNeReversiTerminal":
-              f'.target(name: "NeNeReversiTerminal", dependencies: ["NeNeReversiRender", "NeNeReversiCore"], {SETTINGS})'})),
+          lambda r: edit(r, "Package.swift", 'name: "NeNeReversiTerminal",\n            dependencies: ["NeNeReversiRender"],',
+                         'name: "NeNeReversiTerminal",\n            dependencies: ["NeNeReversiRender", "NeNeReversiCore"],'),
           r"^CNF-010 Package\.swift"),
     Proof("P03", ["ARC-003", "CNF-011", "SWF-014", "QLT-006"], "Core が Foundation を import する",
           core_file("Probe.swift", "import Foundation\n\n/// 証明用。\nenum Probe {}\n"), r"^CNF-011 Sources/NeNeReversiCore/Probe\.swift"),
-    Proof("P04", ["ARC-007", "CNF-012"], "Engine が using: の無い Int.random を呼ぶ",
-          lambda r: edit(r, "Sources/NeNeReversiEngine/Pick.swift", "Int.random(in: 0..<count, using: &generator)",
-                         "Int.random(in: 0..<count)"),
-          r"^CNF-012 Sources/NeNeReversiEngine/Pick\.swift"),
+    Proof("P04", ["ARC-007", "CNF-012"], "Engine が using: の無い randomElement を呼ぶ",
+          lambda r: edit(r, "Sources/NeNeReversiEngine/GameSeries.swift", "randomElement(using: &generator)", "randomElement()"),
+          r"^CNF-012 Sources/NeNeReversiEngine/GameSeries\.swift"),
     Proof("P05", ["ARC-007", "CNF-012"], "Core のテストが CommandLine.arguments を読む（テストにも禁止がかかる）",
           lambda r: write(r, "Tests/NeNeReversiCoreTests/ProbeTests.swift",
                           "/// 証明用。\nenum ProbeTests {\n    static let count = CommandLine.arguments.count\n}\n"),
@@ -240,10 +159,10 @@ PROOFS: list[Proof] = [
           core_file("Side.swift", SWITCH.replace("BODY", "case let other:\n        return other == .none ? 0 : 2")),
           r"^CNF-013 Sources/NeNeReversiCore/Side\.swift"),
     Proof("P09", ["SWF-003", "CNF-016"], "公開の格納 var を置く",
-          lambda r: edit(r, "Sources/NeNeReversiRender/Cell.swift", "public let glyph", "public var glyph"),
+          lambda r: edit(r, "Sources/NeNeReversiRender/Cell.swift", "public let character", "public var character"),
           r"^CNF-016 Sources/NeNeReversiRender/Cell\.swift"),
     Proof("P10", ["SWF-004"], "強制アンラップを書く",
-          lambda r: edit(r, "Sources/nene-reversi/main.swift", "square?.index ?? -1", "square!.index"),
+          lambda r: edit(r, "Sources/nene-reversi/main.swift", "seed: options.seed ?? systemRandom.next())", "seed: options.seed!)"),
           r"\(force_unwrapping\)"),
     Proof("P11", ["SWF-005", "CNF-019"], "製品コードに throws を書く",
           core_file("Probe.swift", "/// 証明用。\nenum Probe {\n    /// 証明用。\n    static func load() throws -> Int { 1 }\n}\n"),
@@ -270,8 +189,8 @@ PROOFS: list[Proof] = [
                     + "        return -1\n    }\n}\n"),
           r"\(cyclomatic_complexity\)"),
     Proof("P19", ["SWF-015", "CNF-003"], "waiver 無しの swiftlint:disable:next で強制アンラップを抑制する",
-          lambda r: edit(r, "Sources/nene-reversi/main.swift", "print(square?.index ?? -1,",
-                         "// " + "swift" + "lint:disable:next force_unwrapping\nprint(square!.index,"),
+          lambda r: edit(r, "Sources/nene-reversi/main.swift", "var screensaver = Screensaver(options: options, colors: colors, seed: options.seed ?? systemRandom.next())",
+                         "// " + "swift" + "lint:disable:next force_unwrapping\nvar screensaver = Screensaver(options: options, colors: colors, seed: options.seed!)"),
           r"^CNF-003 Sources/nene-reversi/main\.swift"),
     Proof("P20", ["SWF-015", "CNF-003"], "@diagnose で非推奨の警告を消す",
           core_file("Probe.swift", "/// 証明用。\nenum Probe {\n    @available(*, deprecated)\n    static func old() -> Int { 1 }\n\n"
@@ -288,8 +207,8 @@ PROOFS: list[Proof] = [
           lambda r: write(r, "Tests/NeNeReversiCoreTests/ProbeTests.swift", "import XCTest\n\n/// 証明用。\nenum ProbeTests {}\n"),
           r"^CNF-011 Tests/NeNeReversiCoreTests/ProbeTests\.swift"),
     Proof("P23", ["QLT-002", "CNF-009"], "target の警告設定を treatAllWarnings(as: .warning) に緩める（警告の出るコードは置かない。設定そのものを拒むこと）",
-          lambda r: write(r, "Package.swift", package_swift({"NeNeReversiCore":
-              '.target(name: "NeNeReversiCore", swiftSettings: [.treatAllWarnings(as: .warning), .enableUpcomingFeature("ExistentialAny")])'})),
+          lambda r: edit(r, "Package.swift", 'name: "NeNeReversiCore",\n            swiftSettings: [.treatAllWarnings(as: .error)',
+                         'name: "NeNeReversiCore",\n            swiftSettings: [.treatAllWarnings(as: .warning)'),
           r"^CNF-009 Package\.swift"),
     Proof("P24", ["QLT-002"], "未使用のローカル定数を置く（警告がエラーになること）",
           core_file("Probe.swift", "/// 証明用。\nenum Probe {\n    /// 証明用。\n    static func run() -> Int {\n        let unused = 1\n        return 2\n    }\n}\n"),
@@ -301,7 +220,7 @@ PROOFS: list[Proof] = [
                      write(r, "Sources/NeNeReversiCore/Hidden.swift", "let x = 1\n")),
           r"^CNF-005 \.gitignore"),
     Proof("P27", ["QLT-004"], "インデントを 2 桁にする", lambda r: edit(r, "Sources/NeNeReversiRender/Cell.swift",
-          "    public let glyph", "  public let glyph"), r"\[Indentation\]"),
+          "    public let character", "  public let character"), r"\[Indentation\]"),
     Proof("P28", ["QLT-004", "CNF-007"], "Core のディレクトリに入れ子の .swiftlint.yml を置く",
           lambda r: write(r, "Sources/NeNeReversiCore/.swiftlint.yml", "only_rules:\n  - force_cast # SWF-004\n"),
           r"^CNF-007 Sources/NeNeReversiCore/\.swiftlint\.yml"),
@@ -357,9 +276,13 @@ PROOFS: list[Proof] = [
           expect_all=[rf"\({rule}\)" for rule in LINT_RULES]),
     Proof("P47", ["QLT-002"], "ソースの無いテスト target を manifest に足す（SwiftPM 自身が警告を出し、コンパイラの警告エラーの外にある）",
           lambda r: (edit(r, "Package.swift", "    targets: [",
-                          f'    targets: [\n        .testTarget(name: "NeNeReversiEngineTests", dependencies: ["NeNeReversiCore", "NeNeReversiEngine"], {SETTINGS}),'),
-                     (r / "Tests/NeNeReversiEngineTests").mkdir(parents=True)),
+                          f'    targets: [\n        .testTarget(name: "NeNeReversiProbeTests", dependencies: ["NeNeReversiCore"], {SETTINGS}),'),
+                     (r / "Tests/NeNeReversiProbeTests").mkdir(parents=True)),
           r"swift-strict: SwiftPM かコンパイラが警告を出した"),
+    Proof("P49", ["QLT-001"], "端末を戻す列からカーソル表示と alternate screen の終了を消す（make smoke が実際に端末の復元を見て落ちること）",
+          lambda r: edit(r, "Sources/NeNeReversiTerminal/ConsoleState.swift",
+                         'Array("\\u{1B}[0m\\u{1B}[?25h\\u{1B}[?1049l".utf8)', 'Array("\\u{1B}[0m".utf8)'),
+          r"smoke: NG  q: 最後に端末を戻す"),
     Proof("P48", ["QLT-001"], "perft の期待値を 1 つ変える（make check の中で swift test が実際に回って落ちること）",
           lambda r: edit(r, "Tests/NeNeReversiCoreTests/PerftTests.swift", "4, 12, 56,", "4, 12, 57,"),
           r"✘ Test matchesPublishedCounts"),
@@ -384,8 +307,8 @@ PROOFS: list[Proof] = [
           core_file("Probe.swift", "/// 証明用。\nenum Probe {\n    /// 証明用。\n    static func wait() async -> Int { 1 }\n}\n"),
           r"^CNF-022 Sources/NeNeReversiCore/Probe\.swift"),
     Proof("P60", ["SWF-009", "SWF-015", "CNF-014"], "Terminal で @preconcurrency import を書く（並行性の error を戻らない warning に下げる・M7-i）",
-          lambda r: edit(r, "Sources/NeNeReversiTerminal/Screen.swift", "import Glibc\n", "@preconcurrency import Glibc\n"),
-          r"^CNF-014 Sources/NeNeReversiTerminal/Screen\.swift", command=["make", "conformance"]),
+          lambda r: edit(r, "Sources/NeNeReversiTerminal/Console.swift", "import Glibc\n", "@preconcurrency import Glibc\n"),
+          r"^CNF-014 Sources/NeNeReversiTerminal/Console\.swift", command=["make", "conformance"]),
     Proof("P61", ["QLT-003", "QLT-004", "CNF-005"], ".swift-format の rules で規則を 1 つ切る（リポジトリ全体の抑制になる・M8-j）",
           lambda r: write(r, ".swift-format", '{\n  "version": 1,\n  "indentation": {\n    "spaces": 4\n  },\n  "lineLength": 120,\n'
                           '  "rules": {\n    "AlwaysUseLowerCamelCase": false\n  }\n}\n'),
@@ -394,8 +317,8 @@ PROOFS: list[Proof] = [
           lambda r: edit(r, "README.md", "# NeNe Reversi\n", "# NeNe Reversi\n\nNot to be confused with " + "Oth" + "ello.\n"),
           r"^CNF-023 README\.md"),
     Proof("P63", ["ARC-002", "CNF-011", "QLT-006"], "Terminal が宣言していない推移的な依存の Core を import する（SwiftPM は拒まない・M6-e）",
-          lambda r: edit(r, "Sources/NeNeReversiTerminal/Screen.swift", "import Glibc\n", "import Glibc\nimport NeNeReversiCore\n"),
-          r"^CNF-011 Sources/NeNeReversiTerminal/Screen\.swift"),
+          lambda r: edit(r, "Sources/NeNeReversiTerminal/Console.swift", "import Glibc\n", "import Glibc\nimport NeNeReversiCore\n"),
+          r"^CNF-011 Sources/NeNeReversiTerminal/Console\.swift"),
     Proof("P64", ["ARC-003", "ARC-007", "CNF-011", "SWF-014"], "Core が FoundationEssentials を import する（Foundation とは別の名前で Date が読める・M5-j）",
           core_file("Probe.swift", "import FoundationEssentials\n\n/// 証明用。\nenum Probe {}\n"), r"^CNF-011 Sources/NeNeReversiCore/Probe\.swift"),
     Proof("P65", ["QLT-007"], "規約検査の CNF-013 の選択肢ごとの判定を壊す（検査器の単体テストが落ちること）",
@@ -405,8 +328,7 @@ PROOFS: list[Proof] = [
     Proof("P42", ["GIT-003"], "形の合わないコミットをフック付きで作ろうとする（フックが拒む）",
           lambda r: subprocess.run(["git", "-C", str(r), "config", "core.hooksPath", ".githooks"], check=True),
           r"GIT-003 件名は",
-          command=["git", "-c", "user.name=proof", "-c", "user.email=proof@example.invalid", "commit", "--allow-empty", "-m", "update stuff"],
-          scaffold=False),
+          command=["git", "-c", "user.name=proof", "-c", "user.email=proof@example.invalid", "commit", "--allow-empty", "-m", "update stuff"]),
 ]
 
 
@@ -497,24 +419,12 @@ def fill_pending(root: Path) -> None:
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
-def scaffold(root: Path) -> None:
-    write(root, "Package.swift", package_swift())
-    for rel, text in SOURCES.items():
-        write(root, rel, text)
-
-
 def run_proof(proof: Proof) -> dict:
     with tempfile.TemporaryDirectory(prefix=f"reversi-proof-{proof.id}-") as tmp:
         root = Path(tmp) / "repo"
         copy_tree(root)
         fill_pending(root)
-        if proof.scaffold:
-            scaffold(root)
         proof.mutate(root)
-        if proof.scaffold:
-            # 生成した manifest の行の長さは証明の対象ではないので、Package.swift だけ整形してから回す
-            subprocess.run(["swift-format", "format", "-i", "--configuration", ".swift-format", "Package.swift"],
-                           cwd=root, capture_output=True)
         p = subprocess.run(proof.command, cwd=root, capture_output=True, text=True, timeout=1800,
                            env=dict(os.environ, NO_COLOR="1"))
         output = (p.stdout + p.stderr).replace(str(root) + "/", "")
