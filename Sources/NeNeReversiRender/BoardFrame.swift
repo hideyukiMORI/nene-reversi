@@ -6,23 +6,20 @@ struct BoardFrame: Sendable, Hashable {
     let row: Int
     let squareWidth: Int
     let squareHeight: Int
-    /// 升の各行で石を塗る範囲（升の行の数だけ）。
+    /// 石を塗る範囲。升の最上行は塗らない（縦に並んだ石が接して 1 本の柱に見えないように・ADR 0009）。
+    /// 直前の手の `[` と `]` は、石を塗る行の左右の端に書く。
     let disc: [DiscSpan]
-    /// 直前の手の升で `[` と `]` を書く行。
-    let markerLines: [Int]
 
-    /// 1 升 6 桁 × 3 行。石は 2・4・2 桁の 3 行で丸く見せる。
+    /// 1 升 6 桁 × 3 行。石は下の 2 行を 4 桁ずつ塗る。
     static let large = BoardFrame(
         column: 4, row: 2, squareWidth: 6, squareHeight: 3,
-        disc: [DiscSpan(offset: 2, width: 2), DiscSpan(offset: 1, width: 4), DiscSpan(offset: 2, width: 2)],
-        markerLines: [1]
+        disc: [DiscSpan(line: 1, offset: 1, width: 4), DiscSpan(line: 2, offset: 1, width: 4)]
     )
 
-    /// 1 升 4 桁 × 2 行。石は 2 桁 × 2 行。
+    /// 1 升 4 桁 × 2 行。石は下の 1 行を 2 桁塗る。
     static let compact = BoardFrame(
         column: 3, row: 2, squareWidth: 4, squareHeight: 2,
-        disc: [DiscSpan(offset: 1, width: 2), DiscSpan(offset: 1, width: 2)],
-        markerLines: [0, 1]
+        disc: [DiscSpan(line: 1, offset: 1, width: 2)]
     )
 
     var width: Int {
@@ -58,18 +55,20 @@ struct BoardFrame: Sendable, Hashable {
         let top = row + square.row * squareHeight
         for line in 0..<squareHeight {
             grid.paint(column: left, row: top + line, width: squareWidth, color: background)
-            if let disc = look.disc, line < self.disc.count {
-                let span = self.disc[line]
-                grid.paint(column: left + span.offset, row: top + line, width: span.width, color: theme.color(of: disc))
+        }
+        if let disc = look.disc {
+            for span in self.disc {
+                grid.paint(
+                    column: left + span.offset, row: top + span.line, width: span.width, color: theme.color(of: disc))
             }
         }
         guard look.hot else {
             return
         }
         let bracket = CellColors(foreground: theme.accent, background: background)
-        for line in markerLines {
-            grid.write("[", column: left, row: top + line, colors: bracket)
-            grid.write("]", column: left + squareWidth - 1, row: top + line, colors: bracket)
+        for span in disc {
+            grid.write("[", column: left, row: top + span.line, colors: bracket)
+            grid.write("]", column: left + squareWidth - 1, row: top + span.line, colors: bracket)
         }
     }
 }
