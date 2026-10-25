@@ -44,6 +44,11 @@ public struct Position: Sendable, Hashable {
         discs(of: disc).nonzeroBitCount
     }
 
+    /// その色が石を打てる升の数（手番でなくても数える）。評価関数が相手の打てる升を数えるのに使う（ADR 0010）。
+    public func placementCount(of disc: Disc) -> Int {
+        mobility(of: disc).nonzeroBitCount
+    }
+
     /// その色の石のある升のビット。
     func discs(of disc: Disc) -> UInt64 {
         switch disc {

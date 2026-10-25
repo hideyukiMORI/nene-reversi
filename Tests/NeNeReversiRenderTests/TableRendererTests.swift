@@ -11,7 +11,7 @@ struct TableRendererTests {
     /// シード 3 で `steps` 歩進めた列の画面。
     static func render(steps: Int, size: ScreenSize, countdown: Countdown? = nil) -> (GameSeries, Grid) {
         var generator = SplitMix64(seed: 3)
-        var series = GameSeries.first
+        var series = GameSeries.starting(using: &generator)
         for _ in 0..<steps {
             series = series.advanced(using: &generator)
         }
@@ -79,6 +79,8 @@ struct TableRendererTests {
         let (series, grid) = Self.render(steps: 1, size: TableRenderer.largeSize)
         let text = Self.text(grid)
         #expect(text.contains("GAME   001"))
+        #expect(text.contains("BLACK  \(series.players.black.handle)"))
+        #expect(text.contains("WHITE  \(series.players.white.handle)"))
         #expect(text.contains("TURN   WHITE"))
         let position = series.game.position
         #expect(text.contains("DISCS  BLACK 0\(position.count(of: .black))  WHITE 0\(position.count(of: .white))"))
@@ -88,7 +90,7 @@ struct TableRendererTests {
 
     @Test func finishedGameShowsTheResultAndTheCountdown() {
         var generator = SplitMix64(seed: 3)
-        var series = GameSeries.first
+        var series = GameSeries.starting(using: &generator)
         while case .ongoing = series.game.status {
             series = series.advanced(using: &generator)
         }
