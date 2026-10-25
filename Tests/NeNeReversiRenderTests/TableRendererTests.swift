@@ -31,12 +31,27 @@ struct TableRendererTests {
     @Test(arguments: [TableRenderer.largeSize, TableRenderer.minimumSize])
     func discCellsAreBlankBlocksInTheDiscColor(_ size: ScreenSize) {
         let (series, grid) = Self.render(steps: 20, size: size)
-        let perDisc = size == TableRenderer.largeSize ? 8 : 4
+        let perDisc = size == TableRenderer.largeSize ? 8 : 2
         for disc in Disc.allCases {
             let painted = Self.cells(grid).filter { $0.background == Self.theme.color(of: disc) }
             #expect(painted.allSatisfy { $0.character == " " })
             #expect(painted.count == series.game.position.count(of: disc) * perDisc)
         }
+    }
+
+    /// どの升も最上行には石を塗らない。縦に並んだ石の塗りが升の境目で接して 1 本の柱に見えないように（Issue #7・ADR 0009）。
+    @Test(arguments: [BoardFrame.large, BoardFrame.compact])
+    func discsLeaveTheTopRowOfEverySquareEmpty(_ frame: BoardFrame) {
+        let size = frame == BoardFrame.large ? TableRenderer.largeSize : TableRenderer.minimumSize
+        let (series, grid) = Self.render(steps: 40, size: size)
+        let discColors = Disc.allCases.map { Self.theme.color(of: $0) }
+        for square in Square.all {
+            let top = frame.row + square.row * frame.squareHeight
+            let left = frame.column + square.column * frame.squareWidth
+            let touched = (left..<left + frame.squareWidth).contains { discColors.contains(grid[$0, top].background) }
+            #expect(!touched, "\(MoveNotation.name(of: square))")
+        }
+        #expect(series.game.position.count(of: .black) + series.game.position.count(of: .white) > 20)
     }
 
     /// 画面の文字はすべて ASCII（1 文字 1 桁の前提・石に Emoji の文字を使わない）。
@@ -56,7 +71,8 @@ struct TableRendererTests {
         let middle = frame.row + square.row * frame.squareHeight + 1
         #expect(grid[left, middle].character == "[")
         #expect(grid[left + frame.squareWidth - 1, middle].character == "]")
-        #expect(Self.cells(grid).filter { $0.character == "[" }.count == 1)
+        #expect(grid[left, middle + 1].character == "[")
+        #expect(Self.cells(grid).filter { $0.character == "[" }.count == 2)
     }
 
     @Test func hudShowsTheGameTheTurnAndTheDiscCounts() {
