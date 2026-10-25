@@ -20,3 +20,5 @@ ADR は「なぜそう決めたか」「何を却下したか」を書く。
 | [0002](0002-swift-testing-only.md) | テスト枠組みは Swift Testing だけにする | 受理 |
 | [0003](0003-port-gates-from-gambit.md) | ゲートと規約検査は NeNe Gambit から移植し、証明はこのリポジトリで取り直す | 受理 |
 | [0004](0004-target-split-and-dependency-graph.md) | target は Core・Engine・Render・Terminal・合成ルートの 5 つに分け、Gambit と同じ向きで依存させる | 受理 |
+| [0005](0005-bitboards-and-move-representation.md) | 盤は黒と白の 64 ビット 2 枚、手は「升に打つ／パス」の閉じた enum、適用は新しい局面を返す | 受理 |
+| [0006](0006-perft-counting-and-gate-depth.md) | perft はパスを 1 手と数える出典に合わせ、release 構成で深さ 11 までゲートに回す | 受理 |

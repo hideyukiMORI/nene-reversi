@@ -10,8 +10,8 @@
 
 ## 1. 承認されたモジュール
 
-空の「将来用 target」を作らない。**2026-10-26 時点で `Package.swift` の target は 0 本**であり、下の一覧は「承認された形」である（ADR 0004）。
-各 target は最初の具体的な責務が生じた PR で足す（Phase 3 の手順 1 で `NeNeReversiCore` とそのテストが最初に入る）。
+空の「将来用 target」を作らない。下の一覧は「承認された形」で（ADR 0004）、各 target は最初の具体的な責務が生じた PR で足す。
+**いま `Package.swift` にあるのは `NeNeReversiCore` と `NeNeReversiCoreTests` の 2 本**（Issue #3）。
 
 ```text
 nene-reversi (executable)
@@ -62,7 +62,8 @@ nene-reversi         -> 上の 4 つすべて（明示的な合成のためだ�
 ### `NeNeReversiCore`
 
 意味の正本を持つ。石の色・升・手（パスを含む）・局面・終局の理由と勝敗（閉じた enum）・局面の文字列表現の拒否理由。
-「パスか」「終局したか」を判定する経路は Core に 1 つずつ。手の内部表記とパスの表し方、盤の表現は 1 つずつ（どれにするかは Phase 3 の ADR で決める）。
+「パスか」「終局したか」を判定する経路は Core に 1 つずつ。盤は黒と白の 64 ビット 2 枚、手は `Move`（中身は `.place(Square)` か `.pass`）、パスか終局かを決めるのは `Position.legalMoves()`、
+局面の文字列表現の読み書きは `PositionCodec`（ADR 0005）。
 
 ### `NeNeReversiEngine`
 

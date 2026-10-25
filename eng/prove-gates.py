@@ -5,8 +5,9 @@
 「意図した規則 ID（または道具の規則名）で落ちること」を出力から確かめる。仕込まない複製（対照）では `make check` が
 exit 0 になることも確かめる。作業木そのものには触れない。
 
-違反を仕込むには Swift のソースが要るので、どの証明も同じ「足場」（依存グラフの正本どおりの 5 target・
-規則に沿った最小のソース）を置いてから 1 か所だけ壊す。足場は証明のための一時物で、作業木には入れない。
+違反を仕込むには Swift のソースが要るので、どの証明も同じ「足場」（依存グラフの正本どおりの target と、
+まだ作業木に無い target の最小のソース）を置いてから 1 か所だけ壊す。作業木にある target（Core とそのテスト・Issue #3）は
+本物をそのまま使う。足場は証明のための一時物で、作業木には入れない。
 
 移植元: NeNe Gambit eng/prove-gates.py（コミット 8c5b8f6 の足場の方式）。複製は git の一覧で作り、
 このリポジトリで足した検査の証明（P55 以降）を足した（ADR 0003）。
@@ -39,32 +40,18 @@ TARGETS = {
     "NeNeReversiTerminal": ("target", '"NeNeReversiRender"'),
     "nene-reversi": ("executableTarget",
                     '"NeNeReversiCore", "NeNeReversiEngine", "NeNeReversiRender", "NeNeReversiTerminal"'),
+    "NeNeReversiCoreTests": ("testTarget", '"NeNeReversiCore"'),
 }
 
 SOURCES = {
-    "Sources/NeNeReversiCore/Square.swift": """\
-/// 盤の升。証明用の最小の型。
-public struct Square: Hashable, Sendable {
-    public let index: Int
-
-    private init(index: Int) {
-        self.index = index
-    }
-
-    /// 0〜63 の升を作る。範囲外なら nil。
-    public static func make(_ index: Int) -> Square? {
-        (0..<64).contains(index) ? Square(index: index) : nil
-    }
-}
-""",
     "Sources/NeNeReversiEngine/Pick.swift": """\
 import NeNeReversiCore
 
 /// 注入された乱数源から升を選ぶ。証明用の最小の型。
 public enum Pick {
-    /// 0..<count から 1 つ選ぶ。
+    /// 0..<count の升から 1 つ選ぶ。
     public static func square(count: Int, using generator: inout some RandomNumberGenerator) -> Square? {
-        Square.make(Int.random(in: 0..<count, using: &generator))
+        Square.all[Int.random(in: 0..<count, using: &generator)]
     }
 }
 """,
@@ -327,7 +314,7 @@ PROOFS: list[Proof] = [
           r"^CNF-006 docs/todo/current\.md"),
     Proof("P31", ["CNF-006"], "証明行の無い規則をマトリクスで active にする（本文も合わせて書き換える）",
           lambda r: (edit(r, "docs/QUALITY_GATES.md", "\n| QLT-008 | planned |", "\n| QLT-008 | active |"),
-                     edit(r, "docs/QUALITY_GATES.md", "- 機械強制: **planned**（レビュー事項。テスト target", "- 機械強制: **active**（レビュー事項。テスト target")),
+                     edit(r, "docs/QUALITY_GATES.md", "- 機械強制: **planned**（レビュー事項。テストは", "- 機械強制: **active**（レビュー事項。テストは")),
           r"^CNF-006 docs/QUALITY_GATES\.md:1: active の QLT-008"),
     Proof("P66", ["CNF-006"], "active の規則の証明行の実測を空にする（空の行は証明ではない）",
           lambda r: replace_line(r, "docs/quality/gate-proofs.md", r"^\| CNF-015 \|.*$", "| CNF-015 |  |  |  |"),
@@ -370,9 +357,12 @@ PROOFS: list[Proof] = [
           expect_all=[rf"\({rule}\)" for rule in LINT_RULES]),
     Proof("P47", ["QLT-002"], "ソースの無いテスト target を manifest に足す（SwiftPM 自身が警告を出し、コンパイラの警告エラーの外にある）",
           lambda r: (edit(r, "Package.swift", "    targets: [",
-                          f'    targets: [\n        .testTarget(name: "NeNeReversiCoreTests", dependencies: ["NeNeReversiCore"], {SETTINGS}),'),
-                     (r / "Tests/NeNeReversiCoreTests").mkdir(parents=True)),
+                          f'    targets: [\n        .testTarget(name: "NeNeReversiEngineTests", dependencies: ["NeNeReversiCore", "NeNeReversiEngine"], {SETTINGS}),'),
+                     (r / "Tests/NeNeReversiEngineTests").mkdir(parents=True)),
           r"swift-strict: SwiftPM かコンパイラが警告を出した"),
+    Proof("P48", ["QLT-001"], "perft の期待値を 1 つ変える（make check の中で swift test が実際に回って落ちること）",
+          lambda r: edit(r, "Tests/NeNeReversiCoreTests/PerftTests.swift", "4, 12, 56,", "4, 12, 57,"),
+          r"✘ Test matchesPublishedCounts"),
     Proof("P50", ["SWF-002"], "文字列の switch の全捕捉を case _ where true: と書く（CNF-013 の字句の外の書き方。コンパイラが網羅に数えないこと）",
           core_file("Probe.swift", "/// 証明用。\nenum Probe {\n    /// 証明用。\n    static func code(_ s: String) -> Int {\n"
                     "        switch s {\n        case \"a\":\n            return 1\n        case _ where true:\n            return 0\n        }\n    }\n}\n"),
