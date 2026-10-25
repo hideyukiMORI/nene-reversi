@@ -250,6 +250,7 @@ CNF-006 が「本文に定義があるのにここに行が無い」「本文と
 | `conformance` | NeNe Reversi 固有・API 単位の禁止・アーキテクチャ・文書整合 | `python3 eng/conformance.py` |
 | `conformance-test` | 規約検査の正例・反例 | `python3 -m unittest discover -s eng/tests` |
 | `commits` | コミットの形 | `eng/validate-commit-message.py --range $(BASE)..HEAD` |
+| `smoke` | 端末の復元（FR-08） | `eng/smoke-terminal.py`（release 構成の実行ファイルを疑似端末で動かし、`q`・Ctrl+C・SIGTERM・SIGSEGV・大きさの変化で端末が戻ることを見る・ADR 0008） |
 | `test` | 振る舞い（perft を含む） | `eng/swift-strict.sh swift test -c release`（Swift Testing・perft は初期局面の深さ 1〜11・ADR 0006） |
 | カバレッジ | 中核の検証密度 | **まだ無い**（QLT-009） |
 | 依存 | 再現性 | 外部依存 0。CNF-009 が許可リスト外を拒否 |

@@ -22,3 +22,5 @@ ADR は「なぜそう決めたか」「何を却下したか」を書く。
 | [0004](0004-target-split-and-dependency-graph.md) | target は Core・Engine・Render・Terminal・合成ルートの 5 つに分け、Gambit と同じ向きで依存させる | 受理 |
 | [0005](0005-bitboards-and-move-representation.md) | 盤は黒と白の 64 ビット 2 枚、手は「升に打つ／パス」の閉じた enum、適用は新しい局面を返す | 受理 |
 | [0006](0006-perft-counting-and-gate-depth.md) | perft はパスを 1 手と数える出典に合わせ、release 構成で深さ 11 までゲートに回す | 受理 |
+| [0007](0007-screen-layout-and-disc-blocks.md) | 画面の文字は ASCII だけ、石は升とは別の色で塗った偶数桁の空白、盤は 2 段の大きさ | 受理 |
+| [0008](0008-terminal-loop-and-signals.md) | 並行は 1 本のループだけ、シグナルは原子的な旗、異常終了はハンドラが端末を戻す | 受理 |

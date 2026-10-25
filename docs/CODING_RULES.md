@@ -140,7 +140,7 @@ termios / ioctl のために依存グラフの正本で `unsafe=allowed` を宣�
 
 並行の形は 1 つ: 合成ルートの 1 本のループが入力と締め切りを待つ。どの target でも `async` / `await` / `Task` / `actor` / スレッド / Dispatch を使わない
 （`Task.sleep` は時計も暗に読む・M5-i）。Core・Engine・Render は同期的な純粋関数だけで書く。
-ループの待ち方（シグナルの受け方とキー入力の待ち方）は Phase 3 の縦切りで決め、ADR に書く。
+ループの待ち方は [ADR 0008](adr/0008-terminal-loop-and-signals.md): 合成ルートの `Screensaver.run` が `poll(2)` で入力と締め切りを待ち、シグナルのハンドラは `Synchronization.Atomic` の旗を立てるだけ。
 
 - 機械強制: **active** → CNF-022（並行の語を字句で拒否）＋CNF-011（Dispatch を import の許可リストに入れない）
 

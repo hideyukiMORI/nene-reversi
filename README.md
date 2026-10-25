@@ -4,8 +4,8 @@ A terminal screensaver in which two hand-written Reversi AIs play each other, ga
 Written in Swift for Ubuntu on WSL2 and Windows Terminal. The Reversi AI (legal moves, evaluation, alpha-beta search) is written from scratch,
 with no external engine. It is a sibling of [NeNe Gambit](https://github.com/hideyukiMORI/nene-gambit), the chess version.
 
-🚧 **Nothing runs on screen yet.** Legal move generation, flipping, passing and game-over detection are in place, with no screen,
-and perft matches the published counts from the initial position up to depth 11. Drawing the board comes next.
+🚧 **Early.** `nene-reversi` draws two players that pick random legal moves, game after game, and restores the terminal however it ends.
+perft matches the published counts from the initial position up to depth 11. The real AI, themes and the cast come next.
 
 ## Development
 
