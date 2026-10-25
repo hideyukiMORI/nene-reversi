@@ -8,6 +8,16 @@ import PackageDescription
 
 let package = Package(
     name: "NeNeReversi",
-    targets: [],
+    targets: [
+        .target(
+            name: "NeNeReversiCore",
+            swiftSettings: [.treatAllWarnings(as: .error), .enableUpcomingFeature("ExistentialAny")]
+        ),
+        .testTarget(
+            name: "NeNeReversiCoreTests",
+            dependencies: ["NeNeReversiCore"],
+            swiftSettings: [.treatAllWarnings(as: .error), .enableUpcomingFeature("ExistentialAny")]
+        ),
+    ],
     swiftLanguageModes: [.v6]
 )
