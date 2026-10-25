@@ -69,7 +69,7 @@ CI で必要なゲートは、すべてローカルで実行できる。検査�
 🔴 **設定が在ることは、検査が効いていることの証明ではない。** SwiftLint の静的バイナリは SourceKit が要る規則を黙って飛ばす。
 `eng/lint.sh` は `Skipping enabled rule` が出たら失敗にする。
 
-- 機械強制: **active** → `make conformance-test`＋CNF-006（active の行に証明行があること）＋CNF-007
+- 機械強制: **active** → `make conformance-test`＋CNF-006（active の行に、実測の空でない証明行があること）＋CNF-007
 
 ### QLT-008 — 振る舞いの変更はテストを伴う
 
@@ -102,7 +102,7 @@ CI で必要なゲートは、すべてローカルで実行できる。検査�
 
 反復中は最も狭い検査を使う。**フルゲートは PR の Draft → Ready の時点で必ず通す。**
 CI の起動条件は `ready_for_review`・`synchronize`・`edited`・`opened`・`reopened` で、**draft の間はジョブを失敗させる**（`eng/ci-require-ready.sh`）。
-🔴 ジョブを `if:` で**スキップしてはならない**。GitHub はスキップされた必須 check を成功として数える。PR #2 で、Ready にした直後に push の反映より先に
+🔴 ジョブを `if:` で**スキップしてはならない**。GitHub はスキップされた必須 check を成功として数える。NeNe Gambit の PR #2 で、Ready にした直後に push の反映より先に
 `ready_for_review` が届いて古い head で CI が走り、新しい head には draft 時のスキップだけが付いて、フルゲートを通っていない head が `CLEAN`（マージ可能）になった。
 Ready の後の push は `synchronize` でフルゲートが回る。必須 check は head の SHA ごとに付き、ruleset の strict up-to-date が古い base を拒むので、
 古い成功 SHA・スキップされたジョブ・狭い検査は、通ったフルゲートの代わりにならない。
@@ -131,7 +131,7 @@ Ready の後の push は `synchronize` でフルゲートが回る。必須 chec
 | `CNF-003` | 抑制は行単位の `swiftlint:disable:next` / `:this` に waiver を添えたものだけ。`@diagnose`・`swift-format-ignore`・`@available(..., deprecated)` を拒否 | SWF-015 | active |
 | `CNF-004` | waiver 台帳の整合（命名・必須項目・索引・**期限切れで落とす**） | SWF-015 | active |
 | `CNF-005` | baseline とゲート無力化の禁止（名前に baseline を含むファイル・ゲートの経路の弱める指定・SwiftLint の除外系の設定・`.swift-format` の `version` / `indentation` / `lineLength` 以外の鍵・生成物の置き場以外を無視する `.gitignore`） | QLT-003 | active |
-| `CNF-006` | 文書整合（規則 ID の重複定義・未定義参照・マトリクスの行・本文とマトリクスの状態の一致・active の証明行） | ADR 0001 | active |
+| `CNF-006` | 文書整合（規則 ID の重複定義・未定義参照・マトリクスの行・本文とマトリクスの状態の一致・active の証明行。実測が空か「未実測」の行は証明に数えない） | ADR 0001 | active |
 | `CNF-007` | 検査設定が実際にゲートから読み込まれていること（設定は所定の 2 つだけ・Makefile が明示的に渡す・有効にした lint 規則に規則 ID） | QLT-007 | active |
 | `CNF-008` | `TODO` / `FIXME` には `(#Issue番号)` | QLT-008 | active |
 | `CNF-009` | manifest の設定（全 target に `treatAllWarnings(as: .error)` と `ExistentialAny`・`unsafeFlags` / `treatWarning` / `plugins:` 等の禁止・依存は許可リストだけ） | QLT-002 | active |

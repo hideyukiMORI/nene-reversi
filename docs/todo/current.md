@@ -8,8 +8,8 @@
 | 段階 | 状態 |
 | --- | --- |
 | Phase 0 言語の実測 | ✅ 2026-10-25（75 ケース・ADR 0001） |
-| Phase 1 文書とゲートの足場 | 🔶 Issue #1 |
-| Phase 2 negative proof | 🔶 Issue #1 |
+| Phase 1 文書とゲートの足場 | ✅ 2026-10-26（Issue #1・PR #2・ruleset 25825059） |
+| Phase 2 negative proof | ✅ 2026-10-26（60 件すべて pass・GitHub 側 2 件・docs/quality/gate-proofs.md） |
 | Phase 3 縦切り（合法手生成と perft から） | 🔲 別 Issue |
 | Phase 4 公開 | 🔲 別 Issue |
 
@@ -18,6 +18,8 @@
 - `make check`（道具の版・`swift build`・整形・lint・規約検査とその単体テスト・コミットの形）。target は 0 本で、製品コードは無い
 
 ## 動かないもの
+
+- `main` への直接 push・force push が拒まれることは試していない（作業環境の権限で止められた・gate-proofs 第 3 節）
 
 - 製品そのもの（盤面・合法手生成・探索・描画・端末は Phase 3）
 - `swift test`（テスト target が無いので結線していない・ADR 0002）

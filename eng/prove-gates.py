@@ -300,11 +300,9 @@ PROOFS: list[Proof] = [
     Proof("P22", ["SWF-016", "CNF-011"], "テストで XCTest を import する",
           lambda r: write(r, "Tests/NeNeReversiCoreTests/ProbeTests.swift", "import XCTest\n\n/// 証明用。\nenum ProbeTests {}\n"),
           r"^CNF-011 Tests/NeNeReversiCoreTests/ProbeTests\.swift"),
-    Proof("P23", ["QLT-002", "CNF-009"], "target の警告設定を treatAllWarnings(as: .warning) にして未使用の定数を置く（ビルドは警告で通る）",
-          lambda r: (write(r, "Package.swift", package_swift({"NeNeReversiCore":
+    Proof("P23", ["QLT-002", "CNF-009"], "target の警告設定を treatAllWarnings(as: .warning) に緩める（警告の出るコードは置かない。設定そのものを拒むこと）",
+          lambda r: write(r, "Package.swift", package_swift({"NeNeReversiCore":
               '.target(name: "NeNeReversiCore", swiftSettings: [.treatAllWarnings(as: .warning), .enableUpcomingFeature("ExistentialAny")])'})),
-                     write(r, "Sources/NeNeReversiCore/Probe.swift",
-                           "/// 証明用。\nenum Probe {\n    /// 証明用。\n    static func run() -> Int {\n        let unused = 1\n        return 2\n    }\n}\n")),
           r"^CNF-009 Package\.swift"),
     Proof("P24", ["QLT-002"], "未使用のローカル定数を置く（警告がエラーになること）",
           core_file("Probe.swift", "/// 証明用。\nenum Probe {\n    /// 証明用。\n    static func run() -> Int {\n        let unused = 1\n        return 2\n    }\n}\n"),
@@ -424,6 +422,17 @@ PROOFS: list[Proof] = [
 
 # 複製した木では再現できない（GitHub 側の）証明。観察した日・run・出力をそのまま書く。
 MANUAL: list[dict] = [
+    {"id": "P43", "rules": ["GIT-004"],
+     "violation": "ruleset が `main` に効いていることを読み戻し、必須 check の失敗した PR がマージできないことを見る"
+                  "（`main` への直接 push と force push の試行は、作業環境の権限で止められたので行っていない）",
+     "command": "`gh api repos/hideyukiMORI/nene-reversi/rules/branches/main`・`gh pr view 2`（2026-10-26）",
+     "evidence": "`main` に効く規則は ruleset 25825059 の `deletion`・`non_fast_forward`・`pull_request`（squash のみ）・`required_status_checks`（`check`）の 4 つ。"
+                 "PR #2 の head 14cd69b は必須 check `check` が FAILURE で `mergeStateStatus` が `BLOCKED`"},
+    {"id": "P46", "rules": ["QLT-012"],
+     "violation": "draft の PR に push する（CI のジョブはスキップでなく失敗し、PR はマージできない）",
+     "command": "GitHub Actions run 40205748916（PR #2・head 14cd69b・2026-10-25T15:11Z）",
+     "evidence": "step `eng/ci-require-ready.sh true` が `ci: PR が draft なのでフルゲートを回さない。Ready にすると回る（QLT-012）` で exit 1。"
+                 "必須 check `check` は FAILURE・`mergeStateStatus` は `BLOCKED`"},
 ]
 FAMILIES = ["ARC", "SWF", "QLT", "CNF", "GIT"]
 

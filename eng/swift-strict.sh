@@ -1,7 +1,7 @@
 #!/bin/bash
 # swift build / swift test を回し、SwiftPM 自身の警告も失敗にする（QLT-002）。
 # treatAllWarnings(as: .error) はコンパイラの警告だけをエラーにし、manifest の解釈で SwiftPM が出す警告
-# （例: "Source files for target X should be located under ..."）は exit 0 のまま通る（Issue #3 で実測）。
+# （例: "Source files for target X should be located under ..."）は exit 0 のまま通る（NeNe Gambit の Issue #3 で実測）。
 set -euo pipefail
 cd "$(dirname "$0")/.."
 log="$(mktemp)"

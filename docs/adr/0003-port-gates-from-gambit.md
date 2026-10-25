@@ -23,13 +23,14 @@ Gambit の main の HEAD はいずれも `64b82ec`。
 | このリポジトリのファイル | 移植元（Gambit） | 変えたこと |
 | --- | --- | --- |
 | `eng/measure-language.py` | `8c5b8f6` | 19 ケースを足した（ADR 0001）。`--swiftlint` の相対パスを解決する（一時ディレクトリで回すと見つからなかった）。テストの失敗行も診断に残す |
-| `eng/conformance.py` | `bbfb078` | CNF-013 を `case` の選択肢ごとの判定に書き換えた。CNF-005 に `.swift-format` の鍵の許可リスト・CNF-014 に `@preconcurrency` を足した。CNF-021〜CNF-023 を足した。`.gitignore` の許可から `.release/` を外した（配布は Phase 4） |
+| `eng/conformance.py` | `bbfb078` | CNF-013 を `case` の選択肢ごとの判定に書き換えた。CNF-005 に `.swift-format` の鍵の許可リスト・CNF-014 に `@preconcurrency` を足した。CNF-021〜CNF-023 を足した。CNF-006 は実測の空の証明行を証明に数えない。`.gitignore` の許可から `.release/` を外した（配布は Phase 4） |
 | `eng/tests/test_conformance.py` | `8c5b8f6` | 上の変更の正例・反例を足した（例のファイル名からチェスの語を外した） |
 | `eng/prove-gates.py` | `8c5b8f6`（足場の方式） | 名前を合わせた。作業木の複製を `git ls-files` の一覧で行う（作業用の非公開ディレクトリを名指ししない）。このリポジトリで足した検査の証明を足した |
-| `eng/swift-strict.sh` | `72691db` | 変えていない（Gambit が Issue #3 で見つけた SwiftPM の警告の穴を、最初から塞ぐ） |
-| `eng/install-tools.sh`・`eng/install-swift.sh`・`eng/lint.sh`・`eng/swift-sources.sh`・`eng/ci-require-ready.sh`・`eng/validate-commit-message.py`・`eng/tests/test_commit_message.py`・`eng/swift.lock`・`eng/swiftlint.lock`・`eng/dependency-allowlist.txt` | `8c5b8f6` | 変えていない |
+| `eng/swift-strict.sh` | `72691db` | 事故の参照先を「NeNe Gambit の Issue #3」と明記した（Gambit が見つけた SwiftPM の警告の穴を、最初から塞ぐ） |
+| `eng/install-tools.sh`・`eng/install-swift.sh`・`eng/lint.sh`・`eng/swift-sources.sh`・`eng/validate-commit-message.py`・`eng/tests/test_commit_message.py`・`eng/swift.lock`・`eng/swiftlint.lock`・`eng/dependency-allowlist.txt` | `8c5b8f6` | 変えていない |
 | `Makefile` | `8c5b8f6`（足場の段） | `build` を `eng/swift-strict.sh` 経由にした（`bbfb078` の形）。`test`・`smoke`・`release` の段はまだ足さない（Phase 3・4） |
-| `.swift-format`・`.swiftlint.yml`・`.githooks/commit-msg`・`.github/workflows/ci.yml`・`.github/pull_request_template.md` | `8c5b8f6` | 変えていない |
+| `.swift-format`・`.swiftlint.yml`・`.githooks/commit-msg`・`.github/pull_request_template.md` | `8c5b8f6` | 変えていない |
+| `.github/workflows/ci.yml`・`eng/ci-require-ready.sh` | `8c5b8f6` | コメントの事故の参照先を「NeNe Gambit の PR #2」と明記した（このリポジトリの PR #2 は別の PR） |
 | `docs/` の各文書・`CLAUDE.md`・`AGENTS.md` | `8c5b8f6` の形 | 中身はリバーシとこのリポジトリの実測で書き直した |
 
 持ってこなかったもの: チェスのルール・評価・探索（Core と Engine はリバーシで一から書く）・キャストとセリフ（新しい 4 名で書く）・
