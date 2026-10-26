@@ -5,7 +5,7 @@ Written in Swift for Ubuntu on WSL2 and Windows Terminal. The Reversi AI (legal 
 with no external engine. It is a sibling of [NeNe Gambit](https://github.com/hideyukiMORI/nene-gambit), the chess version.
 
 🚧 **Early.** `nene-reversi` draws two of four AI characters playing each other with an evaluation function and alpha-beta search,
-game after game, and restores the terminal however it ends. perft matches the published counts up to depth 11. Twelve color themes (`t` or `--theme`). The cast's banter comes next.
+game after game, and restores the terminal however it ends. perft matches the published counts up to depth 11. Twelve color themes (`t` or `--theme`), and the cast comments on the game. Releases come next.
 
 ## Development
 

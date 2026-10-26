@@ -46,6 +46,9 @@ struct ScreenLayout: Sendable, Hashable {
         for (offset, line) in hudLines(state, glyphs: glyphs).prefix(hudRows).enumerated() {
             grid.write(line, column: hudColumn, row: board.row + offset, background: theme.ground)
         }
+        for (offset, line) in ScreenChrome.comms(state, glyphs: glyphs, compact: isCompact).enumerated() {
+            grid.write(line, column: 0, row: commsRow + offset, background: theme.ground)
+        }
         grid.write(
             String(repeating: " ", count: grid.size.columns), column: 0, row: footerRow,
             colors: CellColors(foreground: theme.text, background: theme.panel))
