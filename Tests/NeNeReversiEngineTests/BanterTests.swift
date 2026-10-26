@@ -98,6 +98,16 @@ struct BanterTests {
         #expect((8...30).contains(perHundred), "100 手あたり \(perHundred) 回")
     }
 
+    /// 静かな局面のひと言が他の発言を挟まずに続くとき、いつも同じ側が言うことはない（Issue #18）。
+    /// 出来事の無い手を 6 手ごとに数えるので、話し手を「手を打った側の相手」に固定すると、同じ区間の中では毎回同じ側になった。
+    @Test func consecutiveIdleRemarksAreNotAlwaysTheSameSide() {
+        let lines = Self.transcript(seed: 4, moves: 2000)
+        let pairs = zip(lines, lines.dropFirst()).filter { $0.0.cue == .idle && $0.1.cue == .idle }
+        #expect(pairs.count >= 20)
+        let same = pairs.filter { $0.0.side == $0.1.side }.count
+        #expect(same * 10 <= pairs.count * 8, "同じ側どうし \(same) / \(pairs.count)")
+    }
+
     /// `moves` 歩のあいだに新しく出た発言の列。
     static func transcript(seed: UInt64, moves: Int) -> [Remark] {
         var generator = SplitMix64(seed: seed)
