@@ -32,6 +32,10 @@ enum Wording {
         "DISCS  BLACK " + padded(black, width: 2) + "  WHITE " + padded(white, width: 2)
     }
 
+    static func player(_ disc: Disc, _ handle: String) -> String {
+        name(disc) + "  " + handle
+    }
+
     static func wins(_ disc: Disc, _ count: Int) -> String {
         name(disc) + "  " + padded(count, width: 3)
     }

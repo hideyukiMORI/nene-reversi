@@ -8,7 +8,7 @@ struct GameSeriesTests {
     /// 局が 3 つ終わるまで進めた列の、各局の棋譜。
     static func records(seed: UInt64) -> [[Move]] {
         var generator = SplitMix64(seed: seed)
-        var series = GameSeries.first
+        var series = GameSeries.starting(using: &generator)
         var finished: [[Move]] = []
         while finished.count < 3 {
             let next = series.advanced(using: &generator)
@@ -30,7 +30,7 @@ struct GameSeriesTests {
 
     @Test func everyMoveIsLegalAndFinishedGamesAreCounted() {
         var generator = SplitMix64(seed: 7)
-        var series = GameSeries.first
+        var series = GameSeries.starting(using: &generator)
         while series.gameNumber <= 3 {
             let next = series.advanced(using: &generator)
             if next.gameNumber == series.gameNumber {

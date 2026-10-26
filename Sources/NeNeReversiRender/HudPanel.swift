@@ -12,6 +12,8 @@ enum HudPanel {
         var lines = [
             HudLine(text: Wording.match, heading: true),
             HudLine(text: Wording.game(series.gameNumber), heading: false),
+            HudLine(text: Wording.player(.black, series.players.black.handle), heading: false),
+            HudLine(text: Wording.player(.white, series.players.white.handle), heading: false),
             HudLine(text: Wording.turn(turn(series.game)), heading: false),
             HudLine(text: Wording.moveCount(series.game.moves.count), heading: false),
             HudLine(text: Wording.discs(black: black, white: white), heading: false),

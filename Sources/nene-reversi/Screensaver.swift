@@ -11,14 +11,16 @@ struct Screensaver {
     private let colors: ColorMode
     private let clock = ContinuousClock()
     private var generator: SplitMix64
-    private var series = GameSeries.first
+    private var series: GameSeries
     private var previous: Grid?
 
     init(options: LaunchOptions, colors: ColorMode, seed: UInt64) {
         self.options = options
         self.colors = colors
         self.seed = seed
-        generator = SplitMix64(seed: seed)
+        var generator = SplitMix64(seed: seed)
+        series = GameSeries.starting(using: &generator)
+        self.generator = generator
     }
 
     /// `q` か終了のシグナルが来るまで回す。

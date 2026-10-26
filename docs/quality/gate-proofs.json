@@ -1,6 +1,6 @@
 {
   "measured_on": "2026-10-26",
-  "head": "b668c6f",
+  "head": "ebc3b28",
   "note": "verdict=pass は「意図した規則で落ちた」（対照は exit 0）。作業木の未コミットの変更も複製に含む。",
   "results": [
     {
@@ -21,7 +21,7 @@
         "commits: 0 件・違反 0 件",
         "make check: 緑",
         "----------------------------------------------------------------------",
-        "Ran 104 tests in 0.279s",
+        "Ran 104 tests in 0.272s",
         "",
         "OK"
       ]
@@ -47,7 +47,7 @@
         "2 | ",
         "3 | /// 証明用。",
         "Failed frontend command:",
-        "/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-frontend -frontend -emit-module -experimental-skip-non-inlinable-function-bodies-without-types Sources/NeNeReversiCore/Direction.swift Sources/NeNeReversiCore/Disc.swift Sources/NeNeReversiCore/Game.swift Sources/NeNeReversiCore/GameResult.swift Sources/NeNeReversiCore/Move.swift Sources/NeNeReversiCore/MoveKind.swift Sources/NeNeReversiCore/Position+MoveGeneration.swift Sources/NeNeReversiCore/Position.swift Sources/NeNeReversiCore/PositionCodec.swift Sources/NeNeReversiCore/PositionDecodeOutcome.swift Sources/NeNeReversiCore/PositionDecodeRejection.swift Sources/NeNeReversiCore/PositionStatus.swift Sources/NeNeReversiCore/Probe.swift Sources/NeNeReversiCore/Square.swift -target x86_64-unknown-linux-gnu -disable-objc-interop -I .build/out/Products/Debug-linux-x86_64 -module-cache-path .build/out/ModuleCache.noindex -no-color-diagnostics -Xcc -fno-color-diagnostics -enable-testing -g -debug-info-format\\=dwarf -dwarf-version\\=4 -warnings-as-errors -warnings-as-errors -swift-version 6 -Onone -D SWIFT_PACKAGE -D DEBUG -D SWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE -D Xcode -serialize-debugging-options -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -empty-abi-descriptor -external-plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins/testing\\#/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-plugin-server -validate-clang-modules-once -clang-build-session-file .build/out/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc /tmp/reversi-proof-P01-gftr4ew0 -enable-anonymous-context-mangled-names -file-compilation-dir /tmp/reversi-proof-P01-gftr4ew0 -Xcc -fno-omit-frame-pointer -Xcc -D_LIBCPP_HARDENING_MODE\\=_LIBCPP_HARDENING_MODE_DEBUG -Xcc -fmodules-prune-interval\\=86400 -Xcc -fmodules-prune-after\\=345600 -Xcc -I.build/out/Products/Debug-linux-x86_64/include -Xcc -I.build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/DerivedSources-normal/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/DerivedSources/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/DerivedSources -Xcc -DSWIFT_PACKAGE -Xcc -DDEBUG\\=1 -no-auto-bridging-header-chaining -module-name NeNeReversiCore -package-name repo -const-gather-protocols-file .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/NeNeReversiCore_const_extract_protocols.json -in-process-plugin-server-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/libSwiftInProcPluginServer.so -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/local/lib/swift/host/plugins -emit-module-doc-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Modules/NeNeReversiCore.swiftdoc -emit-module-source-info-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Modules/NeNeReversiCore.swiftsourceinfo -emit-objc-header-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/NeNeReversiCore-Swift.h -serialize-diagnostics-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/NeNeReversiCore-primary-emit-module.dia -emit-dependencies-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/NeNeReversiCore-primary-emit-module.d -parse-as-library -o .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Modules/NeNeReversiCore.swiftmodule",
+        "/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-frontend -frontend -emit-module -experimental-skip-non-inlinable-function-bodies-without-types Sources/NeNeReversiCore/Direction.swift Sources/NeNeReversiCore/Disc.swift Sources/NeNeReversiCore/Game.swift Sources/NeNeReversiCore/GameResult.swift Sources/NeNeReversiCore/Move.swift Sources/NeNeReversiCore/MoveKind.swift Sources/NeNeReversiCore/Position+MoveGeneration.swift Sources/NeNeReversiCore/Position.swift Sources/NeNeReversiCore/PositionCodec.swift Sources/NeNeReversiCore/PositionDecodeOutcome.swift Sources/NeNeReversiCore/PositionDecodeRejection.swift Sources/NeNeReversiCore/PositionStatus.swift Sources/NeNeReversiCore/Probe.swift Sources/NeNeReversiCore/Square.swift -target x86_64-unknown-linux-gnu -disable-objc-interop -I .build/out/Products/Debug-linux-x86_64 -module-cache-path .build/out/ModuleCache.noindex -no-color-diagnostics -Xcc -fno-color-diagnostics -enable-testing -g -debug-info-format\\=dwarf -dwarf-version\\=4 -warnings-as-errors -warnings-as-errors -swift-version 6 -Onone -D SWIFT_PACKAGE -D DEBUG -D SWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE -D Xcode -serialize-debugging-options -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -empty-abi-descriptor -external-plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins/testing\\#/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-plugin-server -validate-clang-modules-once -clang-build-session-file .build/out/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc /tmp/reversi-proof-P01-gyou1x0u -enable-anonymous-context-mangled-names -file-compilation-dir /tmp/reversi-proof-P01-gyou1x0u -Xcc -fno-omit-frame-pointer -Xcc -D_LIBCPP_HARDENING_MODE\\=_LIBCPP_HARDENING_MODE_DEBUG -Xcc -fmodules-prune-interval\\=86400 -Xcc -fmodules-prune-after\\=345600 -Xcc -I.build/out/Products/Debug-linux-x86_64/include -Xcc -I.build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/DerivedSources-normal/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/DerivedSources/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/DerivedSources -Xcc -DSWIFT_PACKAGE -Xcc -DDEBUG\\=1 -no-auto-bridging-header-chaining -module-name NeNeReversiCore -package-name repo -const-gather-protocols-file .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/NeNeReversiCore_const_extract_protocols.json -in-process-plugin-server-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/libSwiftInProcPluginServer.so -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/local/lib/swift/host/plugins -emit-module-doc-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Modules/NeNeReversiCore.swiftdoc -emit-module-source-info-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Modules/NeNeReversiCore.swiftsourceinfo -emit-objc-header-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/NeNeReversiCore-Swift.h -serialize-diagnostics-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/NeNeReversiCore-primary-emit-module.dia -emit-dependencies-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/NeNeReversiCore-primary-emit-module.d -parse-as-library -o .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Modules/NeNeReversiCore.swiftmodule",
         "error: Build failed",
         "make: *** [Makefile:19: build] Error 1"
       ]
@@ -69,8 +69,8 @@
       ],
       "missing": [],
       "tail": [
-        "[132 / 132] nene-reversi-product",
-        "Build complete! (5.58 secs)",
+        "[141 / 141] nene-reversi-product",
+        "Build complete! (5.38 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -97,8 +97,8 @@
       ],
       "missing": [],
       "tail": [
-        "[133 / 133] nene-reversi-product",
-        "Build complete! (6.41 secs)",
+        "[142 / 142] nene-reversi-product",
+        "Build complete! (6.38 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -116,19 +116,19 @@
       "violation": "Engine が using: の無い randomElement を呼ぶ",
       "command": "make check",
       "exit": 2,
-      "expected": "^CNF-012 Sources/NeNeReversiEngine/GameSeries\\.swift",
+      "expected": "^CNF-012 Sources/NeNeReversiEngine/Searcher\\.swift",
       "verdict": "pass",
       "evidence": [
-        "CNF-012 Sources/NeNeReversiEngine/GameSeries.swift:29: randomElement(...) は using: で乱数源を受け取る"
+        "CNF-012 Sources/NeNeReversiEngine/Searcher.swift:45: randomElement(...) は using: で乱数源を受け取る"
       ],
       "missing": [],
       "tail": [
-        "[132 / 132] nene-reversi-product",
-        "Build complete! (5.43 secs)",
+        "[141 / 141] nene-reversi-product",
+        "Build complete! (5.55 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
-        "CNF-012 Sources/NeNeReversiEngine/GameSeries.swift:29: randomElement(...) は using: で乱数源を受け取る",
+        "CNF-012 Sources/NeNeReversiEngine/Searcher.swift:45: randomElement(...) は using: で乱数源を受け取る",
         "conformance: 23 規則・違反 1 件",
         "make: *** [Makefile:37: conformance] Error 1"
       ]
@@ -149,8 +149,8 @@
       ],
       "missing": [],
       "tail": [
-        "[132 / 132] nene-reversi-product",
-        "Build complete! (5.38 secs)",
+        "[141 / 141] nene-reversi-product",
+        "Build complete! (5.52 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -180,7 +180,7 @@
         "11 |     case .white:",
         "12 |         return 1",
         "Failed frontend command:",
-        "/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-frontend -frontend -c Sources/NeNeReversiCore/Direction.swift Sources/NeNeReversiCore/Disc.swift Sources/NeNeReversiCore/Game.swift Sources/NeNeReversiCore/GameResult.swift Sources/NeNeReversiCore/Move.swift Sources/NeNeReversiCore/MoveKind.swift Sources/NeNeReversiCore/Position+MoveGeneration.swift Sources/NeNeReversiCore/Position.swift Sources/NeNeReversiCore/PositionCodec.swift Sources/NeNeReversiCore/PositionDecodeOutcome.swift Sources/NeNeReversiCore/PositionDecodeRejection.swift Sources/NeNeReversiCore/PositionStatus.swift -primary-file Sources/NeNeReversiCore/Side.swift Sources/NeNeReversiCore/Square.swift -emit-dependencies-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Side.d -emit-const-values-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Side.swiftconstvalues -emit-reference-dependencies-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Side.swiftdeps -serialize-diagnostics-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Side.dia -target x86_64-unknown-linux-gnu -disable-objc-interop -I .build/out/Products/Debug-linux-x86_64 -module-cache-path .build/out/ModuleCache.noindex -no-color-diagnostics -Xcc -fno-color-diagnostics -enable-testing -g -debug-info-format\\=dwarf -dwarf-version\\=4 -warnings-as-errors -warnings-as-errors -swift-version 6 -Onone -D SWIFT_PACKAGE -D DEBUG -D SWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE -D Xcode -serialize-debugging-options -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -empty-abi-descriptor -external-plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins/testing\\#/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-plugin-server -validate-clang-modules-once -clang-build-session-file .build/out/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc /tmp/reversi-proof-P06-4zj52_er -enable-anonymous-context-mangled-names -file-compilation-dir /tmp/reversi-proof-P06-4zj52_er -Xcc -fno-omit-frame-pointer -Xcc -D_LIBCPP_HARDENING_MODE\\=_LIBCPP_HARDENING_MODE_DEBUG -Xcc -fmodules-prune-interval\\=86400 -Xcc -fmodules-prune-after\\=345600 -Xcc -I.build/out/Products/Debug-linux-x86_64/include -Xcc -I.build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/DerivedSources-normal/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/DerivedSources/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/DerivedSources -Xcc -DSWIFT_PACKAGE -Xcc -DDEBUG\\=1 -no-auto-bridging-header-chaining -module-name NeNeReversiCore -package-name repo -const-gather-protocols-file .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/NeNeReversiCore_const_extract_protocols.json -in-process-plugin-server-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/libSwiftInProcPluginServer.so -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/local/lib/swift/host/plugins -parse-as-library -o .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Side.o -index-unit-output-path /NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Side.o -index-store-path .build/out -index-system-modules",
+        "/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-frontend -frontend -c Sources/NeNeReversiCore/Direction.swift Sources/NeNeReversiCore/Disc.swift Sources/NeNeReversiCore/Game.swift Sources/NeNeReversiCore/GameResult.swift Sources/NeNeReversiCore/Move.swift Sources/NeNeReversiCore/MoveKind.swift Sources/NeNeReversiCore/Position+MoveGeneration.swift Sources/NeNeReversiCore/Position.swift Sources/NeNeReversiCore/PositionCodec.swift Sources/NeNeReversiCore/PositionDecodeOutcome.swift Sources/NeNeReversiCore/PositionDecodeRejection.swift Sources/NeNeReversiCore/PositionStatus.swift -primary-file Sources/NeNeReversiCore/Side.swift Sources/NeNeReversiCore/Square.swift -emit-dependencies-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Side.d -emit-const-values-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Side.swiftconstvalues -emit-reference-dependencies-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Side.swiftdeps -serialize-diagnostics-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Side.dia -target x86_64-unknown-linux-gnu -disable-objc-interop -I .build/out/Products/Debug-linux-x86_64 -module-cache-path .build/out/ModuleCache.noindex -no-color-diagnostics -Xcc -fno-color-diagnostics -enable-testing -g -debug-info-format\\=dwarf -dwarf-version\\=4 -warnings-as-errors -warnings-as-errors -swift-version 6 -Onone -D SWIFT_PACKAGE -D DEBUG -D SWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE -D Xcode -serialize-debugging-options -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -empty-abi-descriptor -external-plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins/testing\\#/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-plugin-server -validate-clang-modules-once -clang-build-session-file .build/out/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc /tmp/reversi-proof-P06-l6wvrl21 -enable-anonymous-context-mangled-names -file-compilation-dir /tmp/reversi-proof-P06-l6wvrl21 -Xcc -fno-omit-frame-pointer -Xcc -D_LIBCPP_HARDENING_MODE\\=_LIBCPP_HARDENING_MODE_DEBUG -Xcc -fmodules-prune-interval\\=86400 -Xcc -fmodules-prune-after\\=345600 -Xcc -I.build/out/Products/Debug-linux-x86_64/include -Xcc -I.build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/DerivedSources-normal/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/DerivedSources/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/DerivedSources -Xcc -DSWIFT_PACKAGE -Xcc -DDEBUG\\=1 -no-auto-bridging-header-chaining -module-name NeNeReversiCore -package-name repo -const-gather-protocols-file .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/NeNeReversiCore_const_extract_protocols.json -in-process-plugin-server-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/libSwiftInProcPluginServer.so -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/local/lib/swift/host/plugins -parse-as-library -o .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Side.o -index-unit-output-path /NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Side.o -index-store-path .build/out -index-system-modules",
         "error: Build failed",
         "make: *** [Makefile:19: build] Error 1"
       ]
@@ -201,8 +201,8 @@
       ],
       "missing": [],
       "tail": [
-        "[133 / 133] nene-reversi-product",
-        "Build complete! (5.58 secs)",
+        "[142 / 142] nene-reversi-product",
+        "Build complete! (5.60 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -226,8 +226,8 @@
       ],
       "missing": [],
       "tail": [
-        "[133 / 133] nene-reversi-product",
-        "Build complete! (5.29 secs)",
+        "[142 / 142] nene-reversi-product",
+        "Build complete! (5.31 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -252,8 +252,8 @@
       ],
       "missing": [],
       "tail": [
-        "[132 / 132] nene-reversi-product",
-        "Build complete! (5.23 secs)",
+        "[141 / 141] nene-reversi-product",
+        "Build complete! (5.36 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -277,10 +277,10 @@
       ],
       "missing": [],
       "tail": [
-        "[125 / 130] NeNeReversiTerminal",
-        "[128 / 131] NeNeReversiTerminal",
-        "[132 / 132] nene-reversi-product",
-        "Build complete! (5.25 secs)",
+        "[134 / 139] nene-reversi-product",
+        "[137 / 140] NeNeReversiTerminal",
+        "[141 / 141] nene-reversi-product",
+        "Build complete! (5.50 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "Sources/nene-reversi/main.swift:41:83: error: Force Unwrapping Violation: Force unwrapping should be avoided (force_unwrapping)",
@@ -303,8 +303,8 @@
       ],
       "missing": [],
       "tail": [
-        "[133 / 133] nene-reversi-product",
-        "Build complete! (5.37 secs)",
+        "[142 / 142] nene-reversi-product",
+        "Build complete! (5.56 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -329,8 +329,8 @@
       ],
       "missing": [],
       "tail": [
-        "[133 / 133] nene-reversi-product",
-        "Build complete! (5.34 secs)",
+        "[142 / 142] nene-reversi-product",
+        "Build complete! (5.36 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -354,10 +354,10 @@
       ],
       "missing": [],
       "tail": [
-        "[127 / 132] nene-reversi-product",
-        "[129 / 132] NeNeReversiTerminal",
-        "[133 / 133] nene-reversi-product",
-        "Build complete! (5.22 secs)",
+        "[135 / 140] nene-reversi-product",
+        "[138 / 141] NeNeReversiTerminal",
+        "[142 / 142] nene-reversi-product",
+        "Build complete! (5.43 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "Sources/NeNeReversiCore/Probe.swift:4:29: error: Large Tuple Violation: Tuples should have at most 2 members (large_tuple)",
@@ -380,8 +380,8 @@
       ],
       "missing": [],
       "tail": [
-        "[133 / 133] nene-reversi-product",
-        "Build complete! (5.34 secs)",
+        "[142 / 142] nene-reversi-product",
+        "Build complete! (5.53 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -406,8 +406,8 @@
       ],
       "missing": [],
       "tail": [
-        "[133 / 133] nene-reversi-product",
-        "Build complete! (5.31 secs)",
+        "[142 / 142] nene-reversi-product",
+        "Build complete! (5.37 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -432,8 +432,8 @@
       ],
       "missing": [],
       "tail": [
-        "[133 / 133] nene-reversi-product",
-        "Build complete! (5.34 secs)",
+        "[142 / 142] nene-reversi-product",
+        "Build complete! (5.36 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -457,10 +457,10 @@
       ],
       "missing": [],
       "tail": [
-        "[126 / 131] nene-reversi-product",
-        "[129 / 132] NeNeReversiTerminal",
-        "[133 / 133] nene-reversi-product",
-        "Build complete! (5.29 secs)",
+        "[135 / 140] nene-reversi-product",
+        "[138 / 141] NeNeReversiTerminal",
+        "[142 / 142] nene-reversi-product",
+        "Build complete! (5.41 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "Sources/NeNeReversiCore/Probe.swift:4:12: error: Function Parameter Count Violation: Function should have 4 parameters or less: it currently has 5 (function_parameter_count)",
@@ -482,10 +482,10 @@
       ],
       "missing": [],
       "tail": [
-        "[126 / 131] nene-reversi-product",
-        "[129 / 132] NeNeReversiTerminal",
-        "[133 / 133] nene-reversi-product",
-        "Build complete! (5.36 secs)",
+        "[135 / 140] nene-reversi-product",
+        "[138 / 141] NeNeReversiTerminal",
+        "[142 / 142] nene-reversi-product",
+        "Build complete! (5.45 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "Sources/NeNeReversiCore/Probe.swift:4:5: error: Cyclomatic Complexity Violation: Function should have complexity 10 or less; currently complexity is 11 (cyclomatic_complexity)",
@@ -508,8 +508,8 @@
       ],
       "missing": [],
       "tail": [
-        "[132 / 132] nene-reversi-product",
-        "Build complete! (5.30 secs)",
+        "[141 / 141] nene-reversi-product",
+        "Build complete! (5.60 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -535,7 +535,7 @@
       ],
       "missing": [],
       "tail": [
-        "Build complete! (5.33 secs)",
+        "Build complete! (5.55 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -561,8 +561,8 @@
       ],
       "missing": [],
       "tail": [
-        "[132 / 132] nene-reversi-product",
-        "Build complete! (5.46 secs)",
+        "[141 / 141] nene-reversi-product",
+        "Build complete! (5.40 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -587,8 +587,8 @@
       ],
       "missing": [],
       "tail": [
-        "[132 / 132] nene-reversi-product",
-        "Build complete! (5.39 secs)",
+        "[141 / 141] nene-reversi-product",
+        "Build complete! (5.44 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -646,7 +646,7 @@
         "",
         "[#NoUsage]: <https://docs.swift.org/compiler/documentation/diagnostics/no-usage>",
         "Failed frontend command:",
-        "/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-frontend -frontend -c Sources/NeNeReversiCore/Direction.swift Sources/NeNeReversiCore/Disc.swift Sources/NeNeReversiCore/Game.swift Sources/NeNeReversiCore/GameResult.swift Sources/NeNeReversiCore/Move.swift Sources/NeNeReversiCore/MoveKind.swift Sources/NeNeReversiCore/Position+MoveGeneration.swift Sources/NeNeReversiCore/Position.swift Sources/NeNeReversiCore/PositionCodec.swift Sources/NeNeReversiCore/PositionDecodeOutcome.swift Sources/NeNeReversiCore/PositionDecodeRejection.swift Sources/NeNeReversiCore/PositionStatus.swift -primary-file Sources/NeNeReversiCore/Probe.swift Sources/NeNeReversiCore/Square.swift -emit-dependencies-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Probe.d -emit-const-values-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Probe.swiftconstvalues -emit-reference-dependencies-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Probe.swiftdeps -serialize-diagnostics-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Probe.dia -target x86_64-unknown-linux-gnu -disable-objc-interop -I .build/out/Products/Debug-linux-x86_64 -module-cache-path .build/out/ModuleCache.noindex -no-color-diagnostics -Xcc -fno-color-diagnostics -enable-testing -g -debug-info-format\\=dwarf -dwarf-version\\=4 -warnings-as-errors -warnings-as-errors -swift-version 6 -Onone -D SWIFT_PACKAGE -D DEBUG -D SWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE -D Xcode -serialize-debugging-options -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -empty-abi-descriptor -external-plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins/testing\\#/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-plugin-server -validate-clang-modules-once -clang-build-session-file .build/out/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc /tmp/reversi-proof-P24-_bpfasis -enable-anonymous-context-mangled-names -file-compilation-dir /tmp/reversi-proof-P24-_bpfasis -Xcc -fno-omit-frame-pointer -Xcc -D_LIBCPP_HARDENING_MODE\\=_LIBCPP_HARDENING_MODE_DEBUG -Xcc -fmodules-prune-interval\\=86400 -Xcc -fmodules-prune-after\\=345600 -Xcc -I.build/out/Products/Debug-linux-x86_64/include -Xcc -I.build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/DerivedSources-normal/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/DerivedSources/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/DerivedSources -Xcc -DSWIFT_PACKAGE -Xcc -DDEBUG\\=1 -no-auto-bridging-header-chaining -module-name NeNeReversiCore -package-name repo -const-gather-protocols-file .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/NeNeReversiCore_const_extract_protocols.json -in-process-plugin-server-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/libSwiftInProcPluginServer.so -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/local/lib/swift/host/plugins -parse-as-library -o .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Probe.o -index-unit-output-path /NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Probe.o -index-store-path .build/out -index-system-modules",
+        "/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-frontend -frontend -c Sources/NeNeReversiCore/Direction.swift Sources/NeNeReversiCore/Disc.swift Sources/NeNeReversiCore/Game.swift Sources/NeNeReversiCore/GameResult.swift Sources/NeNeReversiCore/Move.swift Sources/NeNeReversiCore/MoveKind.swift Sources/NeNeReversiCore/Position+MoveGeneration.swift Sources/NeNeReversiCore/Position.swift Sources/NeNeReversiCore/PositionCodec.swift Sources/NeNeReversiCore/PositionDecodeOutcome.swift Sources/NeNeReversiCore/PositionDecodeRejection.swift Sources/NeNeReversiCore/PositionStatus.swift -primary-file Sources/NeNeReversiCore/Probe.swift Sources/NeNeReversiCore/Square.swift -emit-dependencies-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Probe.d -emit-const-values-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Probe.swiftconstvalues -emit-reference-dependencies-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Probe.swiftdeps -serialize-diagnostics-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Probe.dia -target x86_64-unknown-linux-gnu -disable-objc-interop -I .build/out/Products/Debug-linux-x86_64 -module-cache-path .build/out/ModuleCache.noindex -no-color-diagnostics -Xcc -fno-color-diagnostics -enable-testing -g -debug-info-format\\=dwarf -dwarf-version\\=4 -warnings-as-errors -warnings-as-errors -swift-version 6 -Onone -D SWIFT_PACKAGE -D DEBUG -D SWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE -D Xcode -serialize-debugging-options -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -empty-abi-descriptor -external-plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins/testing\\#/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-plugin-server -validate-clang-modules-once -clang-build-session-file .build/out/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc /tmp/reversi-proof-P24-50t8jwa3 -enable-anonymous-context-mangled-names -file-compilation-dir /tmp/reversi-proof-P24-50t8jwa3 -Xcc -fno-omit-frame-pointer -Xcc -D_LIBCPP_HARDENING_MODE\\=_LIBCPP_HARDENING_MODE_DEBUG -Xcc -fmodules-prune-interval\\=86400 -Xcc -fmodules-prune-after\\=345600 -Xcc -I.build/out/Products/Debug-linux-x86_64/include -Xcc -I.build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/DerivedSources-normal/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/DerivedSources/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/DerivedSources -Xcc -DSWIFT_PACKAGE -Xcc -DDEBUG\\=1 -no-auto-bridging-header-chaining -module-name NeNeReversiCore -package-name repo -const-gather-protocols-file .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/NeNeReversiCore_const_extract_protocols.json -in-process-plugin-server-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/libSwiftInProcPluginServer.so -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/local/lib/swift/host/plugins -parse-as-library -o .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Probe.o -index-unit-output-path /NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Probe.o -index-store-path .build/out -index-system-modules",
         "error: Build failed",
         "make: *** [Makefile:19: build] Error 1"
       ]
@@ -667,8 +667,8 @@
       ],
       "missing": [],
       "tail": [
-        "[132 / 132] nene-reversi-product",
-        "Build complete! (5.42 secs)",
+        "[141 / 141] nene-reversi-product",
+        "Build complete! (5.47 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -693,8 +693,8 @@
       ],
       "missing": [],
       "tail": [
-        "[133 / 133] nene-reversi-product",
-        "Build complete! (5.33 secs)",
+        "[142 / 142] nene-reversi-product",
+        "Build complete! (5.39 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -718,11 +718,11 @@
       ],
       "missing": [],
       "tail": [
-        "[125 / 130] NeNeReversiTerminal",
-        "[125 / 130] nene-reversi-product",
-        "[128 / 131] NeNeReversiTerminal",
-        "[132 / 132] nene-reversi-product",
-        "Build complete! (5.35 secs)",
+        "[134 / 139] NeNeReversiTerminal",
+        "[134 / 139] nene-reversi-product",
+        "[137 / 140] NeNeReversiTerminal",
+        "[141 / 141] nene-reversi-product",
+        "Build complete! (5.37 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "Sources/NeNeReversiRender/Cell.swift:5:1: error: [Indentation] indent by 2 spaces",
         "make: *** [Makefile:31: format] Error 123"
@@ -744,8 +744,8 @@
       ],
       "missing": [],
       "tail": [
-        "[132 / 132] nene-reversi-product",
-        "Build complete! (5.38 secs)",
+        "[141 / 141] nene-reversi-product",
+        "Build complete! (5.55 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -770,9 +770,9 @@
       ],
       "missing": [],
       "tail": [
-        "[128 / 131] NeNeReversiTerminal",
-        "[132 / 132] nene-reversi-product",
-        "Build complete! (5.31 secs)",
+        "[137 / 140] NeNeReversiTerminal",
+        "[141 / 141] nene-reversi-product",
+        "Build complete! (5.43 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "warning: Skipping enabled rule 'statement_position' because it requires SourceKit and SourceKit access is prohibited.",
@@ -791,16 +791,16 @@
       "expected": "^CNF-006 docs/todo/current\\.md",
       "verdict": "pass",
       "evidence": [
-        "CNF-006 docs/todo/current.md:30: 未定義の規則 ID ARC-099"
+        "CNF-006 docs/todo/current.md:32: 未定義の規則 ID ARC-099"
       ],
       "missing": [],
       "tail": [
-        "[132 / 132] nene-reversi-product",
-        "Build complete! (5.48 secs)",
+        "[141 / 141] nene-reversi-product",
+        "Build complete! (5.46 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
-        "CNF-006 docs/todo/current.md:30: 未定義の規則 ID ARC-099",
+        "CNF-006 docs/todo/current.md:32: 未定義の規則 ID ARC-099",
         "conformance: 23 規則・違反 1 件",
         "make: *** [Makefile:37: conformance] Error 1"
       ]
@@ -820,8 +820,8 @@
       ],
       "missing": [],
       "tail": [
-        "[132 / 132] nene-reversi-product",
-        "Build complete! (5.24 secs)",
+        "[141 / 141] nene-reversi-product",
+        "Build complete! (5.50 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -845,8 +845,8 @@
       ],
       "missing": [],
       "tail": [
-        "[132 / 132] nene-reversi-product",
-        "Build complete! (5.23 secs)",
+        "[141 / 141] nene-reversi-product",
+        "Build complete! (5.77 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -870,8 +870,8 @@
       ],
       "missing": [],
       "tail": [
-        "[132 / 132] nene-reversi-product",
-        "Build complete! (5.34 secs)",
+        "[141 / 141] nene-reversi-product",
+        "Build complete! (5.45 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -913,13 +913,13 @@
       "expected": "(FAILED|did NOT match)",
       "verdict": "pass",
       "evidence": [
-        "/tmp/tmp.c9y1KVX9sb/swiftlint_linux_amd64.zip: FAILED",
+        "/tmp/tmp.4opqB3aOVW/swiftlint_linux_amd64.zip: FAILED",
         "sha256sum: WARNING: 1 computed checksum did NOT match"
       ],
       "missing": [],
       "tail": [
         "eng/install-tools.sh",
-        "/tmp/tmp.c9y1KVX9sb/swiftlint_linux_amd64.zip: FAILED",
+        "/tmp/tmp.4opqB3aOVW/swiftlint_linux_amd64.zip: FAILED",
         "sha256sum: WARNING: 1 computed checksum did NOT match",
         "make: *** [Makefile:16: tools] Error 1"
       ]
@@ -941,8 +941,8 @@
       ],
       "missing": [],
       "tail": [
-        "[132 / 132] nene-reversi-product",
-        "Build complete! (5.30 secs)",
+        "[141 / 141] nene-reversi-product",
+        "Build complete! (5.33 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -966,8 +966,8 @@
       ],
       "missing": [],
       "tail": [
-        "[132 / 132] nene-reversi-product",
-        "Build complete! (5.46 secs)",
+        "[141 / 141] nene-reversi-product",
+        "Build complete! (5.53 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -992,8 +992,8 @@
       ],
       "missing": [],
       "tail": [
-        "[132 / 132] nene-reversi-product",
-        "Build complete! (5.36 secs)",
+        "[141 / 141] nene-reversi-product",
+        "Build complete! (5.59 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -1041,7 +1041,7 @@
         "AssertionError: 'CNF-013' not found in [] : CNF-013 が Sources/Core/Board.swift で発火しない",
         "",
         "----------------------------------------------------------------------",
-        "Ran 104 tests in 0.283s",
+        "Ran 104 tests in 0.265s",
         "",
         "FAILED (failures=1)",
         "make: *** [Makefile:40: conformance-test] Error 1"
@@ -1062,8 +1062,8 @@
       ],
       "missing": [],
       "tail": [
-        "[133 / 133] nene-reversi-product",
-        "Build complete! (5.31 secs)",
+        "[142 / 142] nene-reversi-product",
+        "Build complete! (5.37 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -1088,8 +1088,8 @@
       ],
       "missing": [],
       "tail": [
-        "[133 / 133] nene-reversi-product",
-        "Build complete! (5.24 secs)",
+        "[142 / 142] nene-reversi-product",
+        "Build complete! (5.40 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -1109,17 +1109,17 @@
       "expected": "GIT-003 [0-9a-f]{7}: 件名は",
       "verdict": "pass",
       "evidence": [
-        "GIT-003 560187a: 件名は `<type>(<scope>): <日本語の説明> (#<issue番号>)` の形（type は feat / fix / docs / refactor / test / build / ci / chore）"
+        "GIT-003 5fa8126: 件名は `<type>(<scope>): <日本語の説明> (#<issue番号>)` の形（type は feat / fix / docs / refactor / test / build / ci / chore）"
       ],
       "missing": [],
       "tail": [
         "python3 eng/validate-commit-message.py --range \"origin/main..HEAD\"",
         "commits: 1 件・違反 1 件",
         "----------------------------------------------------------------------",
-        "Ran 104 tests in 0.272s",
+        "Ran 104 tests in 0.267s",
         "",
         "OK",
-        "GIT-003 560187a: 件名は `<type>(<scope>): <日本語の説明> (#<issue番号>)` の形（type は feat / fix / docs / refactor / test / build / ci / chore）",
+        "GIT-003 5fa8126: 件名は `<type>(<scope>): <日本語の説明> (#<issue番号>)` の形（type は feat / fix / docs / refactor / test / build / ci / chore）",
         "make: *** [Makefile:43: commits] Error 1"
       ]
     },
@@ -1183,12 +1183,12 @@
       ],
       "missing": [],
       "tail": [
-        "[124 / 130] nene-reversi-product",
-        "[125 / 130] NeNeReversiTerminal",
-        "[125 / 130] nene-reversi-product",
-        "[128 / 131] NeNeReversiTerminal",
-        "[132 / 132] nene-reversi-product",
-        "Build complete! (5.38 secs)",
+        "[133 / 139] nene-reversi-product",
+        "[134 / 139] NeNeReversiTerminal",
+        "[134 / 139] nene-reversi-product",
+        "[137 / 140] NeNeReversiTerminal",
+        "[141 / 141] nene-reversi-product",
+        "Build complete! (5.40 secs)",
         "swift-strict: SwiftPM かコンパイラが警告を出した（QLT-002）",
         "make: *** [Makefile:19: build] Error 1"
       ]
@@ -1212,7 +1212,7 @@
         "smoke: ok  端末の外からは exit 1 で理由を 1 行",
         "smoke: 失敗 5 件",
         "----------------------------------------------------------------------",
-        "Ran 104 tests in 0.263s",
+        "Ran 104 tests in 0.277s",
         "",
         "OK",
         "make: *** [Makefile:28: smoke] Error 1"
@@ -1230,15 +1230,15 @@
       "verdict": "pass",
       "evidence": [
         "✘ Test matchesPublishedCounts() recorded an issue at PerftTests.swift:23:9: Expectation failed: measured == Self.publishedCounts",
-        "✘ Test matchesPublishedCounts() failed after 5.595 seconds with 1 issue."
+        "✘ Test matchesPublishedCounts() failed after 4.885 seconds with 1 issue."
       ],
       "missing": [],
       "tail": [
-        "✘ Test run with 14 tests in 4 suites failed after 5.596 seconds with 1 issue.",
+        "✘ Test run with 14 tests in 4 suites failed after 4.886 seconds with 1 issue.",
         "Note: Some test targets reported failures:",
         "  - NeNeReversiCoreTests (Swift Testing)",
         "----------------------------------------------------------------------",
-        "Ran 104 tests in 0.264s",
+        "Ran 104 tests in 0.274s",
         "",
         "OK",
         "make: *** [Makefile:23: test] Error 1"
@@ -1265,7 +1265,7 @@
         " 6 |         case \"a\":",
         " 7 |             return 1",
         "Failed frontend command:",
-        "/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-frontend -frontend -c Sources/NeNeReversiCore/Direction.swift Sources/NeNeReversiCore/Disc.swift Sources/NeNeReversiCore/Game.swift Sources/NeNeReversiCore/GameResult.swift Sources/NeNeReversiCore/Move.swift Sources/NeNeReversiCore/MoveKind.swift Sources/NeNeReversiCore/Position+MoveGeneration.swift Sources/NeNeReversiCore/Position.swift Sources/NeNeReversiCore/PositionCodec.swift Sources/NeNeReversiCore/PositionDecodeOutcome.swift Sources/NeNeReversiCore/PositionDecodeRejection.swift Sources/NeNeReversiCore/PositionStatus.swift -primary-file Sources/NeNeReversiCore/Probe.swift Sources/NeNeReversiCore/Square.swift -emit-dependencies-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Probe.d -emit-const-values-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Probe.swiftconstvalues -emit-reference-dependencies-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Probe.swiftdeps -serialize-diagnostics-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Probe.dia -target x86_64-unknown-linux-gnu -disable-objc-interop -I .build/out/Products/Debug-linux-x86_64 -module-cache-path .build/out/ModuleCache.noindex -no-color-diagnostics -Xcc -fno-color-diagnostics -enable-testing -g -debug-info-format\\=dwarf -dwarf-version\\=4 -warnings-as-errors -warnings-as-errors -swift-version 6 -Onone -D SWIFT_PACKAGE -D DEBUG -D SWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE -D Xcode -serialize-debugging-options -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -empty-abi-descriptor -external-plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins/testing\\#/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-plugin-server -validate-clang-modules-once -clang-build-session-file .build/out/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc /tmp/reversi-proof-P50-uy6c604z -enable-anonymous-context-mangled-names -file-compilation-dir /tmp/reversi-proof-P50-uy6c604z -Xcc -fno-omit-frame-pointer -Xcc -D_LIBCPP_HARDENING_MODE\\=_LIBCPP_HARDENING_MODE_DEBUG -Xcc -fmodules-prune-interval\\=86400 -Xcc -fmodules-prune-after\\=345600 -Xcc -I.build/out/Products/Debug-linux-x86_64/include -Xcc -I.build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/DerivedSources-normal/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/DerivedSources/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/DerivedSources -Xcc -DSWIFT_PACKAGE -Xcc -DDEBUG\\=1 -no-auto-bridging-header-chaining -module-name NeNeReversiCore -package-name repo -const-gather-protocols-file .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/NeNeReversiCore_const_extract_protocols.json -in-process-plugin-server-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/libSwiftInProcPluginServer.so -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/local/lib/swift/host/plugins -parse-as-library -o .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Probe.o -index-unit-output-path /NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Probe.o -index-store-path .build/out -index-system-modules",
+        "/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-frontend -frontend -c Sources/NeNeReversiCore/Direction.swift Sources/NeNeReversiCore/Disc.swift Sources/NeNeReversiCore/Game.swift Sources/NeNeReversiCore/GameResult.swift Sources/NeNeReversiCore/Move.swift Sources/NeNeReversiCore/MoveKind.swift Sources/NeNeReversiCore/Position+MoveGeneration.swift Sources/NeNeReversiCore/Position.swift Sources/NeNeReversiCore/PositionCodec.swift Sources/NeNeReversiCore/PositionDecodeOutcome.swift Sources/NeNeReversiCore/PositionDecodeRejection.swift Sources/NeNeReversiCore/PositionStatus.swift -primary-file Sources/NeNeReversiCore/Probe.swift Sources/NeNeReversiCore/Square.swift -emit-dependencies-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Probe.d -emit-const-values-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Probe.swiftconstvalues -emit-reference-dependencies-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Probe.swiftdeps -serialize-diagnostics-path .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Probe.dia -target x86_64-unknown-linux-gnu -disable-objc-interop -I .build/out/Products/Debug-linux-x86_64 -module-cache-path .build/out/ModuleCache.noindex -no-color-diagnostics -Xcc -fno-color-diagnostics -enable-testing -g -debug-info-format\\=dwarf -dwarf-version\\=4 -warnings-as-errors -warnings-as-errors -swift-version 6 -Onone -D SWIFT_PACKAGE -D DEBUG -D SWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE -D Xcode -serialize-debugging-options -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -empty-abi-descriptor -external-plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins/testing\\#/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-plugin-server -validate-clang-modules-once -clang-build-session-file .build/out/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc /tmp/reversi-proof-P50-ct9xqa4v -enable-anonymous-context-mangled-names -file-compilation-dir /tmp/reversi-proof-P50-ct9xqa4v -Xcc -fno-omit-frame-pointer -Xcc -D_LIBCPP_HARDENING_MODE\\=_LIBCPP_HARDENING_MODE_DEBUG -Xcc -fmodules-prune-interval\\=86400 -Xcc -fmodules-prune-after\\=345600 -Xcc -I.build/out/Products/Debug-linux-x86_64/include -Xcc -I.build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/DerivedSources-normal/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/DerivedSources/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/DerivedSources -Xcc -DSWIFT_PACKAGE -Xcc -DDEBUG\\=1 -no-auto-bridging-header-chaining -module-name NeNeReversiCore -package-name repo -const-gather-protocols-file .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/NeNeReversiCore_const_extract_protocols.json -in-process-plugin-server-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/libSwiftInProcPluginServer.so -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/local/lib/swift/host/plugins -parse-as-library -o .build/out/Intermediates.noindex/NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Probe.o -index-unit-output-path /NeNeReversi.build/Debug-linux-x86_64/NeNeReversiCore-t.build/Objects-normal/x86_64/Probe.o -index-store-path .build/out -index-system-modules",
         "error: Build failed",
         "make: *** [Makefile:19: build] Error 1"
       ]
@@ -1286,8 +1286,8 @@
       ],
       "missing": [],
       "tail": [
-        "[133 / 133] nene-reversi-product",
-        "Build complete! (5.34 secs)",
+        "[142 / 142] nene-reversi-product",
+        "Build complete! (5.75 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -1312,8 +1312,8 @@
       ],
       "missing": [],
       "tail": [
-        "[133 / 133] nene-reversi-product",
-        "Build complete! (5.36 secs)",
+        "[142 / 142] nene-reversi-product",
+        "Build complete! (5.57 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -1338,8 +1338,8 @@
       ],
       "missing": [],
       "tail": [
-        "[133 / 133] nene-reversi-product",
-        "Build complete! (5.38 secs)",
+        "[142 / 142] nene-reversi-product",
+        "Build complete! (5.47 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -1364,8 +1364,8 @@
       ],
       "missing": [],
       "tail": [
-        "[133 / 133] nene-reversi-product",
-        "Build complete! (5.40 secs)",
+        "[142 / 142] nene-reversi-product",
+        "Build complete! (5.54 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -1390,8 +1390,8 @@
       ],
       "missing": [],
       "tail": [
-        "[133 / 133] nene-reversi-product",
-        "Build complete! (5.24 secs)",
+        "[142 / 142] nene-reversi-product",
+        "Build complete! (5.47 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -1440,8 +1440,8 @@
       ],
       "missing": [],
       "tail": [
-        "[132 / 132] nene-reversi-product",
-        "Build complete! (5.33 secs)",
+        "[141 / 141] nene-reversi-product",
+        "Build complete! (5.43 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -1465,8 +1465,8 @@
       ],
       "missing": [],
       "tail": [
-        "[132 / 132] nene-reversi-product",
-        "Build complete! (5.40 secs)",
+        "[141 / 141] nene-reversi-product",
+        "Build complete! (5.51 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -1492,8 +1492,8 @@
       ],
       "missing": [],
       "tail": [
-        "[132 / 132] nene-reversi-product",
-        "Build complete! (5.30 secs)",
+        "[141 / 141] nene-reversi-product",
+        "Build complete! (5.59 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -1520,8 +1520,8 @@
       ],
       "missing": [],
       "tail": [
-        "[133 / 133] nene-reversi-product",
-        "Build complete! (6.05 secs)",
+        "[142 / 142] nene-reversi-product",
+        "Build complete! (6.29 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
@@ -1549,7 +1549,7 @@
         "AssertionError: 'CNF-013' not found in [] : CNF-013 が Sources/Core/Board.swift で発火しない",
         "",
         "----------------------------------------------------------------------",
-        "Ran 104 tests in 0.265s",
+        "Ran 104 tests in 0.276s",
         "",
         "FAILED (failures=8)",
         "make: *** [Makefile:40: conformance-test] Error 1"
