@@ -136,5 +136,5 @@ Waivers: none | WVR-NNNN
 現在のタスクは [docs/todo/current.md](docs/todo/current.md)。GitHub Issue が正で、そこは要約。
 
 - 動くもの: `make check`。`nene-reversi` がキャスト 4 名から組んだ 2 名の対局（評価とアルファベータ探索・ADR 0010）を Gambit の B 案の HUD・12 テーマ・キャストのセリフ（ADR 0012）で端末に描き続け、`q`・Ctrl+C・異常終了のどれでも端末を戻す（ADR 0008・0011）。perft は初期局面の深さ 1〜11 で公表値と一致（ADR 0006）
-- 動かないもの: 配布。Phase 3 の次は Phase 4（公開・Release は施主の確認を取る）
+- 公開: v0.1.0（ベータ・2026-10-26）。`install.sh` で入る。次の版も `make release TAG=v<版>` の 1 経路で、公開は施主の確認を取る
 - 施主の決定は [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md) にそろっている。決定を覆したくなった点や、要件に無い機能を足したくなった点は、自分で決めずに施主に聞く
