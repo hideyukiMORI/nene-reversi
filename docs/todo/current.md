@@ -16,8 +16,8 @@
 | Phase 3-4 評価と探索・キャスト 4 名 | ✅ 2026-10-26（Issue #9・PR #10・ADR 0010） |
 | Phase 3-5a サイバー HUD・12 テーマ・罫線の枠 | ✅ 2026-10-26（Issue #11・PR #12・ADR 0011） |
 | Phase 3-5b キャストの顔とセリフ | ✅ 2026-10-26（Issue #13・PR #14・ADR 0012） |
-| Phase 4a 配布の仕組み（公開はしない） | 🔄 Issue #15（ADR 0013・QLT-014） |
-| Phase 4b 公開（README の画面写真・Release） | 🔲 施主の確認待ち |
+| Phase 4a 配布の仕組み（公開はしない） | ✅ 2026-10-26（Issue #15・PR #16・ADR 0013・QLT-014） |
+| Phase 4b 公開（README の画面写真・v0.1.0 ベータ） | 🔄 Issue #17（施主の指示「ベータリリースしちゃって」2026-10-26） |
 
 ## 動くもの
 
@@ -28,10 +28,9 @@
 ## 動かないもの
 
 - `main` への直接 push・force push が拒まれることは試していない（作業環境の権限で止められた・gate-proofs 第 3 節）
-- GitHub Release の公開とタグ・README の画面写真と英語／日本語の README（Phase 4b・施主の確認を取る）
 - Windows Terminal の実機の画面写真は撮った（2026-10-26）。施主にはまだ見てもらっていない
 
 ## 次の 1 手
 
-施主に画面写真・キャスト・PAPER の石の色を見てもらう。OK が出たら Phase 4b（README の画面写真・`make release TAG=v0.1.0`・Release の公開）。
-Release の公開は施主の確認を取る（Q12）。
+Issue #17 の PR をマージしたら、clean な `main` で `make release TAG=v0.1.0` → 短い起動 → `v0.1.0` のタグと Release（ベータ）→ 再ダウンロードして照合 → `install.sh` を試す。
+そのあとは施主の「あとで調整」を待つ（見た目・キャスト）。
