@@ -135,6 +135,6 @@ Waivers: none | WVR-NNNN
 
 現在のタスクは [docs/todo/current.md](docs/todo/current.md)。GitHub Issue が正で、そこは要約。
 
-- 動くもの: `make check`。`nene-reversi` がキャスト 4 名から組んだ 2 名の対局（評価とアルファベータ探索・ADR 0010）を端末に描き続け、`q`・Ctrl+C・異常終了のどれでも端末を戻す（ADR 0007・0008）。perft は初期局面の深さ 1〜11 で公表値と一致（ADR 0006）
-- 動かないもの: 12 テーマ・キャストの顔とセリフ・罫線の枠・配布。Phase 3 の次は「サイバー HUD・テーマ・セリフ」
+- 動くもの: `make check`。`nene-reversi` がキャスト 4 名から組んだ 2 名の対局（評価とアルファベータ探索・ADR 0010）を Gambit の B 案の HUD と 12 テーマで端末に描き続け、`q`・Ctrl+C・異常終了のどれでも端末を戻す（ADR 0008・0011）。perft は初期局面の深さ 1〜11 で公表値と一致（ADR 0006）
+- 動かないもの: キャストの顔とセリフ・配布。Phase 3 の次は「キャストの顔とセリフ」
 - 施主の決定は [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md) にそろっている。決定を覆したくなった点や、要件に無い機能を足したくなった点は、自分で決めずに施主に聞く

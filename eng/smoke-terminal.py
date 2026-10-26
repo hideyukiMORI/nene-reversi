@@ -4,14 +4,16 @@
     python3 eng/smoke-terminal.py <nene-reversi の実行ファイル>
 
 見ること:
-- alternate screen に入り、24 ビットの色で盤と HUD（`GAME   001`）を描く
+- alternate screen に入り、24 ビットの色で盤と HUD（`GAME 001`）を描く
+- `t` で次のテーマ（PHOSPHOR）に替わる
+- 罫線の幅の問い合わせに答えない端末（この疑似端末）では ASCII の枠に落ちる
 - `q`・Ctrl+C・SIGTERM のどれで終わっても exit 0 で、出力の最後が端末を戻す列で、termios の lflag が起動前と同じ
 - SIGSEGV（異常終了）でも端末を戻してから、そのシグナルで死ぬ
 - 端末を小さくすると落ちずに 1 行の文言を出し、戻すと盤を描き直す
 - 間違った起動オプションは exit 2、端末の外から起動すると exit 1（どちらも理由を 1 行）
 
 標準ライブラリだけで書く。Windows Terminal での見え方の代わりにはならない（QLT-013）。
-移植元: NeNe Gambit eng/smoke-terminal.py（コミット 64b82ec）。字形・テーマ・枠の確かめは落とした（手順 5 で足す）。
+移植元: NeNe Gambit eng/smoke-terminal.py（コミット 64b82ec）。字形の確かめは落とした（Q4）。
 """
 
 from __future__ import annotations
@@ -19,6 +21,7 @@ from __future__ import annotations
 import fcntl
 import os
 import pty
+import re
 import select
 import signal
 import struct
@@ -27,7 +30,7 @@ import sys
 import termios
 import time
 
-ENTER, LEAVE, SHOW, GAME = "\x1b[?1049h", "\x1b[?1049l", "\x1b[?25h", "GAME   001"
+ENTER, LEAVE, SHOW, GAME = "\x1b[?1049h", "\x1b[?1049l", "\x1b[?25h", "GAME 001"
 
 
 def run(binary: str, keys: list[bytes], send: int | None = None, shrink: bool = False) -> tuple[str, int, bool]:
@@ -84,7 +87,7 @@ def main() -> int:
     binary = sys.argv[1]
     failures: list[str] = []
     for label, keys, send, expect in (
-        ("q", [b"q"], None, ("exit", 0)),
+        ("q", [b"t", b"q"], None, ("exit", 0)),
         ("Ctrl+C", [b"\x03"], None, ("exit", 0)),
         ("SIGTERM", [], signal.SIGTERM, ("exit", 0)),
         ("SIGSEGV", [], signal.SIGSEGV, ("signal", signal.SIGSEGV)),
@@ -98,6 +101,10 @@ def main() -> int:
         check(f"{label}: 最後に端末を戻す（カーソルを出し alternate screen を抜ける）",
               SHOW in text and text.rstrip().endswith(LEAVE), failures)
         check(f"{label}: termios の lflag が起動前と同じ", restored, failures)
+        plain = re.sub(r"\x1b\[[0-9;?]*[A-Za-z]", "", text)  # 色とカーソルの CSI 列を除いた、書いた文字だけ
+        if label == "q":
+            check("t: 次のテーマ（PHOSPHOR）に替わる", "PHOSPHOR" in plain, failures)
+            check("幅の問い合わせに答えない端末では ASCII の枠に落ちる", "+-[ MATCH ]" in plain and "┌" not in plain, failures)
         if label == "resize":
             check("resize: 小さくすると 1 行の文言を出し、戻すと盤を描き直す",
                   "TERMINAL TOO SMALL" in text and text.rfind(GAME) > text.find("TERMINAL TOO SMALL"), failures)

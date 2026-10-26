@@ -1,7 +1,9 @@
-/// キー入力から読み取った利用者の意図（閉じた集合）。キーは `q` だけ（Q9。`t` は手順 5 で足す）。
+/// キー入力から読み取った利用者の意図（閉じた集合）。キーは `q` と `t` だけ（Q9）。
 public enum KeyIntent: Sendable, Hashable {
     /// `q`: 終了する（FR-08）。
     case quit
+    /// `t`: カラーテーマを次へ（FR-13）。
+    case cycleTheme
 
     /// 読み取ったバイト列の中の意図（順番どおり）。知らないキーとエスケープ列は捨てる。
     public static func decode(_ bytes: [UInt8]) -> [KeyIntent] {
@@ -15,6 +17,8 @@ public enum KeyIntent: Sendable, Hashable {
             }
             if byte == UInt8(ascii: "q") || byte == UInt8(ascii: "Q") {
                 intents.append(.quit)
+            } else if byte == UInt8(ascii: "t") || byte == UInt8(ascii: "T") {
+                intents.append(.cycleTheme)
             }
             index += 1
         }

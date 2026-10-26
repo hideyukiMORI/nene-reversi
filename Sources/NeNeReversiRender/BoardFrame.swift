@@ -65,7 +65,7 @@ struct BoardFrame: Sendable, Hashable {
         guard look.hot else {
             return
         }
-        let bracket = CellColors(foreground: theme.accent, background: background)
+        let bracket = CellColors(foreground: theme.marker, background: background)
         for span in disc {
             grid.write("[", column: left, row: top + span.line, colors: bracket)
             grid.write("]", column: left + squareWidth - 1, row: top + span.line, colors: bracket)
