@@ -25,7 +25,8 @@ struct LaunchOptions {
                 return .rejected("\(name) に値が無い")
             }
             guard let next = options.setting(name, value) else {
-                return .rejected("読めないオプション: \(name) \(value)（--seed / --theme / --move-interval / --result-pause）")
+                return .rejected(
+                    "読めないオプション: \(name) \(value)（--seed / --theme / --move-interval / --result-pause / --version）")
             }
             options = next
         }

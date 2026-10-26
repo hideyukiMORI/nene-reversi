@@ -15,8 +15,9 @@
 | Phase 3-3 実機の画面写真 | ✅ 2026-10-26（Issue #7・PR #8・石が縦につながって見えた → ADR 0009）。施主の確認待ち |
 | Phase 3-4 評価と探索・キャスト 4 名 | ✅ 2026-10-26（Issue #9・PR #10・ADR 0010） |
 | Phase 3-5a サイバー HUD・12 テーマ・罫線の枠 | ✅ 2026-10-26（Issue #11・PR #12・ADR 0011） |
-| Phase 3-5b キャストの顔とセリフ | 🔄 Issue #13（ADR 0012） |
-| Phase 4 公開 | 🔲 別 Issue |
+| Phase 3-5b キャストの顔とセリフ | ✅ 2026-10-26（Issue #13・PR #14・ADR 0012） |
+| Phase 4a 配布の仕組み（公開はしない） | 🔄 Issue #15（ADR 0013・QLT-014） |
+| Phase 4b 公開（README の画面写真・Release） | 🔲 施主の確認待ち |
 
 ## 動くもの
 
@@ -27,10 +28,10 @@
 ## 動かないもの
 
 - `main` への直接 push・force push が拒まれることは試していない（作業環境の権限で止められた・gate-proofs 第 3 節）
-- 配布（Phase 4: `Version.swift`・公開スクリプト・`install.sh`・README の画面写真。Release の公開は施主の確認を取る）
+- GitHub Release の公開とタグ・README の画面写真と英語／日本語の README（Phase 4b・施主の確認を取る）
 - Windows Terminal の実機の画面写真は撮った（2026-10-26）。施主にはまだ見てもらっていない
 
 ## 次の 1 手
 
-Issue #13 の PR をマージしたら Phase 3 は終わり。施主に画面写真とキャストを見てもらってから、Phase 4（公開）の Issue を立てる。
+施主に画面写真・キャスト・PAPER の石の色を見てもらう。OK が出たら Phase 4b（README の画面写真・`make release TAG=v0.1.0`・Release の公開）。
 Release の公開は施主の確認を取る（Q12）。
