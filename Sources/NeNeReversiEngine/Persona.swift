@@ -2,7 +2,7 @@ import NeNeReversiCore
 
 /// 黒白の性格（キャスト）。施主の決定 Q7: 4 名で、名前・性格・打ち方はリナが決める（NeNe Gambit の 4 名とは別）。局ごとにランダムに組む。
 ///
-/// 性格は「打ち方」（`SearchProfile`・FR-06・ADR 0010）を持つ。顔とセリフ（FR-14）は手順 5 で足す。
+/// 性格は「打ち方」（`SearchProfile`・FR-06・ADR 0010）と、顔と台本（FR-14・ADR 0012）を持つ。
 public enum Persona: Sendable, Hashable, CaseIterable {
     /// 返せるだけ返したがる欲張り。石の数を数えて悦に入る。
     case flip
@@ -52,5 +52,42 @@ public enum Persona: Sendable, Hashable, CaseIterable {
     /// その局で打つ手。合法手が無ければ nil。返す手は必ず合法手の中にある。
     public func choose(in game: Game, using generator: inout some RandomNumberGenerator) -> Move? {
         Searcher.choose(in: game, profile: profile, using: &generator)
+    }
+
+    /// 気分ごとの顔（ASCII 3 文字）。
+    public func face(_ mood: Mood) -> String {
+        faces.face(mood)
+    }
+
+    private var faces: Faces {
+        switch self {
+        case .flip:
+            return Faces(smug: "$_$", neutral: "o.o", grim: "T_T")
+        case .corner:
+            return Faces(smug: "[=]", neutral: "[-]", grim: "[x]")
+        case .spam:
+            return Faces(smug: "\\o/", neutral: ":D ", grim: "D: ")
+        case .lazy:
+            return Faces(smug: "-.-", neutral: "zzz", grim: "~_~")
+        }
+    }
+
+    /// セリフの台本（1 人 50 本）。
+    var script: [ScriptLine] {
+        switch self {
+        case .flip:
+            return Self.flipScript
+        case .corner:
+            return Self.cornerScript
+        case .spam:
+            return Self.spamScript
+        case .lazy:
+            return Self.lazyScript
+        }
+    }
+
+    /// その出来事のセリフ（名前や顔と同じく性格の公開の属性）。
+    public func lines(for cue: Cue) -> [String] {
+        script.filter { $0.cue == cue }.map(\.text)
     }
 }

@@ -1,7 +1,7 @@
 import NeNeReversiCore
 import NeNeReversiEngine
 
-/// 上端の題と、下端のキーのヘルプ（FR-15: 常に出す）と直前の手。
+/// 上端の題・盤の下の COMMS・下端のキーのヘルプ（FR-15: 常に出す）と直前の手。
 ///
 /// 形は NeNe Gambit の `ScreenChrome`（コミット 64b82ec）にならった。字形の切り替え（`g`）は持たない（Q4・Q9）。
 enum ScreenChrome {
@@ -35,5 +35,25 @@ enum ScreenChrome {
             ]
         }
         return segments
+    }
+
+    /// COMMS の 2 行（古い方は控えめな色、新しい方は話し手の側の色・ADR 0012）。
+    static func comms(_ state: ScreenState, glyphs: FrameGlyphs, compact: Bool) -> [[Segment]] {
+        let theme = state.options.theme
+        let lines = state.series.banter.lines
+        return lines.enumerated().map { index, remark in
+            let newest = index == lines.count - 1
+            let tag = remark.side == .black ? "B" : "W"
+            let handle = compact ? remark.persona.handle + " " : remark.persona.handle.padding(to: 11)
+            let lead = compact ? glyphs.marker + tag + " " : glyphs.marker + " " + tag + "  "
+            let face = remark.face + (compact ? " " : "  ")
+            guard newest else {
+                return [Segment(lead + handle + face + remark.text, theme.dim)]
+            }
+            return [
+                Segment(lead + handle, theme.color(of: remark.side)), Segment(face, theme.accentAlt),
+                Segment(remark.text, theme.text),
+            ]
+        }
     }
 }
