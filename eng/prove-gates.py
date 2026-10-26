@@ -189,8 +189,8 @@ PROOFS: list[Proof] = [
                     + "        return -1\n    }\n}\n"),
           r"\(cyclomatic_complexity\)"),
     Proof("P19", ["SWF-015", "CNF-003"], "waiver 無しの swiftlint:disable:next で強制アンラップを抑制する",
-          lambda r: edit(r, "Sources/nene-reversi/main.swift", "var screensaver = Screensaver(options: options, colors: colors, seed: options.seed ?? systemRandom.next())",
-                         "// " + "swift" + "lint:disable:next force_unwrapping\nvar screensaver = Screensaver(options: options, colors: colors, seed: options.seed!)"),
+          lambda r: edit(r, "Sources/nene-reversi/main.swift", "var screensaver = Screensaver(options: options, display: display, seed: options.seed ?? systemRandom.next())",
+                         "// " + "swift" + "lint:disable:next force_unwrapping\nvar screensaver = Screensaver(options: options, display: display, seed: options.seed!)"),
           r"^CNF-003 Sources/nene-reversi/main\.swift"),
     Proof("P20", ["SWF-015", "CNF-003"], "@diagnose で非推奨の警告を消す",
           core_file("Probe.swift", "/// 証明用。\nenum Probe {\n    @available(*, deprecated)\n    static func old() -> Int { 1 }\n\n"

@@ -4,19 +4,19 @@ import NeNeReversiTerminal
 
 /// 対局の列を時計で回す 1 本のループ（ADR 0008）。状態はすべてこの値の中にあり、ループの外へ出ない（ARC-005）。
 ///
-/// 移植元: NeNe Gambit `Sources/nene-gambit/Screensaver.swift`（コミット 64b82ec）。字形・テーマのキーは落とした。
+/// 移植元: NeNe Gambit `Sources/nene-gambit/Screensaver.swift`（コミット 64b82ec）。字形のキーは落とした（Q4）。
 struct Screensaver {
     private let options: LaunchOptions
     private let seed: UInt64
-    private let colors: ColorMode
     private let clock = ContinuousClock()
     private var generator: SplitMix64
     private var series: GameSeries
+    private var display: DisplayOptions
     private var previous: Grid?
 
-    init(options: LaunchOptions, colors: ColorMode, seed: UInt64) {
+    init(options: LaunchOptions, display: DisplayOptions, seed: UInt64) {
         self.options = options
-        self.colors = colors
+        self.display = display
         self.seed = seed
         var generator = SplitMix64(seed: seed)
         series = GameSeries.starting(using: &generator)
@@ -34,6 +34,7 @@ struct Screensaver {
             if signals.interrupted || intents.contains(.quit) {
                 return
             }
+            apply(intents)
             if signals.resized {
                 previous = nil
             }
@@ -44,6 +45,17 @@ struct Screensaver {
                 deadline = started + pause(after: series)
             }
             draw(deadline: deadline)
+        }
+    }
+
+    private mutating func apply(_ intents: [KeyIntent]) {
+        for intent in intents {
+            switch intent {
+            case .quit:
+                return
+            case .cycleTheme:
+                display = display.cyclingTheme
+            }
         }
     }
 
@@ -67,9 +79,9 @@ struct Screensaver {
 
     /// いまの状態を描き、前のフレームとの差分だけを 1 回で書く。
     private mutating func draw(deadline: ContinuousClock.Instant) {
-        let state = ScreenState(series: series, theme: .standard, seed: seed, countdown: countdown(until: deadline))
+        let state = ScreenState(series: series, options: display, seed: seed, countdown: countdown(until: deadline))
         let grid = TableRenderer.render(state, size: Console.size())
-        Console.write(FrameEncoder.encode(grid, previous: previous, colors: colors))
+        Console.write(FrameEncoder.encode(grid, previous: previous, colors: display.traits.colors))
         previous = grid
     }
 

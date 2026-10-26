@@ -37,8 +37,12 @@ let colors: ColorMode = {
     return ["truecolor", "24bit"].contains(String(cString: raw)) ? .trueColor : .palette256
 }()
 
+/// 罫線の文字が 1 桁で描かれる端末だけ罫線の枠を使い、それ以外（2 桁・答えが無い）は ASCII の枠へ落とす（ADR 0011）。
+let traits = TerminalTraits(frame: Console.columnsAdvanced(by: "─") == 1 ? .boxDrawing : .ascii, colors: colors)
+let display = DisplayOptions(theme: options.theme, traits: traits)
+
 var systemRandom = SystemRandomNumberGenerator()
-var screensaver = Screensaver(options: options, colors: colors, seed: options.seed ?? systemRandom.next())
+var screensaver = Screensaver(options: options, display: display, seed: options.seed ?? systemRandom.next())
 screensaver.run()
 Console.close()
 exit(0)

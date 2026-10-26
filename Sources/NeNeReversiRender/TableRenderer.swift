@@ -7,7 +7,7 @@ public enum TableRenderer {
 
     /// 1 画面分の格子。
     public static func render(_ state: ScreenState, size: ScreenSize) -> Grid {
-        let theme = state.theme
+        let theme = state.options.theme
         var grid = Grid.filled(size, with: Cell(character: " ", foreground: theme.text, background: theme.ground))
         switch LayoutKind.fitting(size) {
         case .large:

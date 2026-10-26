@@ -15,11 +15,12 @@ struct TerminalTests {
         return grid
     }
 
-    @Test func qQuitsAndOtherKeysAndEscapeSequencesAreIgnored() {
+    @Test func qQuitsTCyclesAndOtherKeysAndEscapeSequencesAreIgnored() {
         #expect(KeyIntent.decode(Array("q".utf8)) == [.quit])
         #expect(KeyIntent.decode(Array("Q".utf8)) == [.quit])
         #expect(KeyIntent.decode([0x1B, UInt8(ascii: "["), UInt8(ascii: "A"), UInt8(ascii: "q")]) == [.quit])
-        #expect(KeyIntent.decode(Array("xt".utf8)).isEmpty)
+        #expect(KeyIntent.decode(Array("xg".utf8)).isEmpty)
+        #expect(KeyIntent.decode(Array("tTq".utf8)) == [.cycleTheme, .cycleTheme, .quit])
     }
 
     @Test func firstFrameClearsTheScreenAndWritesEverything() {
@@ -38,6 +39,12 @@ struct TerminalTests {
         #expect(bytes.hasPrefix("\u{1B}[1;2H"))
         #expect(bytes.contains("c"))
         #expect(!bytes.contains("a"))
+    }
+
+    @Test func cursorReportReadsTheLastColumn() {
+        #expect(CursorReport.column(in: Array("\u{1B}[3;2R".utf8)) == 2)
+        #expect(CursorReport.column(in: Array("x\u{1B}[1;9Ry\u{1B}[4;12R".utf8)) == 12)
+        #expect(CursorReport.column(in: Array("no report".utf8)) == nil)
     }
 
     @Test func palette256PicksTheNearestColor() {

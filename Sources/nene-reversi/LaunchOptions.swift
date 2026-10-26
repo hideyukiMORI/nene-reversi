@@ -1,16 +1,20 @@
+import NeNeReversiRender
+
 /// 起動オプション（ARC-008: 境界で 1 度だけ検証し、型に変えてから中へ渡す）。
 ///
-/// `--seed <0 以上の整数>` / `--move-interval <秒>` / `--result-pause <秒>`。
-/// 移植元: NeNe Gambit `Sources/nene-gambit/LaunchOptions.swift`（コミット 64b82ec）。字形とテーマの選択は落とした（テーマは手順 5）。
+/// `--seed <0 以上の整数>` / `--theme <名前>` / `--move-interval <秒>` / `--result-pause <秒>`。
+/// 移植元: NeNe Gambit `Sources/nene-gambit/LaunchOptions.swift`（コミット 64b82ec）。字形の選択は落とした（Q4）。
 struct LaunchOptions {
     /// 乱数のシード。与えられなければ nil（起動時にシステムの乱数から決める）。
     let seed: UInt64?
+    let theme: Theme
     /// 1 手を打つ間隔（FR-11 の初期値は 1.0 秒）。
     let moveInterval: Duration
     /// 終局後に結果を見せる時間（FR-11 の初期値は 3 秒）。
     let resultPause: Duration
 
-    static let defaults = LaunchOptions(seed: nil, moveInterval: .milliseconds(1000), resultPause: .seconds(3))
+    static let defaults = LaunchOptions(
+        seed: nil, theme: .standard, moveInterval: .milliseconds(1000), resultPause: .seconds(3))
 
     /// 起動オプションを読む（プログラム名を除いた引数）。
     static func parse(_ arguments: [String]) -> LaunchParsing {
@@ -21,7 +25,7 @@ struct LaunchOptions {
                 return .rejected("\(name) に値が無い")
             }
             guard let next = options.setting(name, value) else {
-                return .rejected("読めないオプション: \(name) \(value)（--seed / --move-interval / --result-pause）")
+                return .rejected("読めないオプション: \(name) \(value)（--seed / --theme / --move-interval / --result-pause）")
             }
             options = next
         }
@@ -31,13 +35,16 @@ struct LaunchOptions {
     /// 文字列で分岐するので `switch` ではなく `if` で書く（SWF-002: 全捕捉を書かない）。
     private func setting(_ name: String, _ value: String) -> LaunchOptions? {
         if name == "--seed" {
-            return UInt64(value).map { LaunchOptions(seed: $0, moveInterval: moveInterval, resultPause: resultPause) }
+            return UInt64(value).map { with(seed: $0) }
+        }
+        if name == "--theme" {
+            return Theme.named(value).map { with(theme: $0) }
         }
         if name == "--move-interval" {
-            return Self.duration(value).map { LaunchOptions(seed: seed, moveInterval: $0, resultPause: resultPause) }
+            return Self.duration(value).map { with(moveInterval: $0) }
         }
         if name == "--result-pause" {
-            return Self.duration(value).map { LaunchOptions(seed: seed, moveInterval: moveInterval, resultPause: $0) }
+            return Self.duration(value).map { with(resultPause: $0) }
         }
         return nil
     }
@@ -48,5 +55,19 @@ struct LaunchOptions {
             return nil
         }
         return .milliseconds(Int((seconds * 1000).rounded()))
+    }
+
+    private func with(seed: UInt64) -> LaunchOptions {
+        LaunchOptions(seed: seed, theme: theme, moveInterval: moveInterval, resultPause: resultPause)
+    }
+
+    private func with(theme: Theme) -> LaunchOptions {
+        LaunchOptions(seed: seed, theme: theme, moveInterval: moveInterval, resultPause: resultPause)
+    }
+
+    private func with(moveInterval: Duration? = nil, resultPause: Duration? = nil) -> LaunchOptions {
+        LaunchOptions(
+            seed: seed, theme: theme, moveInterval: moveInterval ?? self.moveInterval,
+            resultPause: resultPause ?? self.resultPause)
     }
 }
