@@ -101,7 +101,7 @@ public struct Banter: Sendable, Hashable {
     }
 
     /// その手でいちばん優先度の高い出来事と、その確率の抽選の結果。
-    /// パス（必ず・相手が 50% で返す）＞角（80%・もう片方が 40% で返す）＞たくさん返した（60%）＞静かな手が 6 手続くたび（50%）。
+    /// パス（必ず・相手が 50% で返す）＞角（80%・もう片方が 40% で返す）＞たくさん返した（60%）＞静かな手が 6 手続くたび（50%・話し手はどちらか半々）。
     static func pick(_ facts: MoveFacts, quietMoves: Int, using generator: inout some RandomNumberGenerator)
         -> BanterPick?
     {
@@ -124,7 +124,8 @@ public struct Banter: Sendable, Hashable {
             return roll < 60 ? BanterPick(prompt: prompt, reply: nil) : nil
         }
         if quietMoves > 0, quietMoves % idleEvery == 0, roll < 50 {
-            return BanterPick(prompt: Prompt(speaker: other, cue: .idle), reply: nil)
+            // 6 手ごとなので、話し手を手番から決めると同じ区間の中では毎回同じ側になる（Issue #18）
+            return BanterPick(prompt: Prompt(speaker: coin ? mover : other, cue: .idle), reply: nil)
         }
         return nil
     }
